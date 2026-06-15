@@ -165,23 +165,23 @@
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 10px;
+      gap: 16px;
+      margin-top: 12px;
     }
 
-    /* 태블릿: 8장 한 줄, 가로 스크롤 허용 */
+    /* 태블릿: 8장 한 줄 */
     @media (min-width: 481px) and (max-width: 900px) {
       .cards-grid {
         grid-template-columns: repeat(8, minmax(76px, 1fr));
         overflow-x: auto;
-        padding-bottom: 4px;
-        gap: 8px;
+        padding-bottom: 6px;
+        gap: 12px;
       }
     }
 
     /* 스마트폰: 4열 2행 */
     @media (max-width: 480px) {
-      .cards-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+      .cards-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
     }
 
     .card {
@@ -223,15 +223,19 @@
     .card-badge {
       font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       position: absolute;
-      top: 4px;
-      right: 4px;
-      font-size: .75rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.9);
-      color: #666;
+      top: 5px;
+      right: 5px;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.28);
+      color: rgba(255,255,255,.75);
       z-index: 2;
-      box-shadow: 0 2px 6px rgba(0,0,0,.08);
     }
 
     .card.selected-must {
@@ -249,13 +253,11 @@
     .card.selected-must .card-badge {
       background: var(--must);
       color: #5b3a00;
-      font-weight: 800;
     }
 
     .card.selected-bonus .card-badge {
       background: var(--bonus);
       color: #004b68;
-      font-weight: 800;
     }
 
     .mode-toggle {
@@ -552,12 +554,12 @@
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: center;
-        gap: 24px;
-        padding: 4px 8px 12px;
+        gap: 32px;
+        padding: 6px 12px 14px;
         max-width: 100%;
       }
       .selected-card-item {
-        flex: 0 0 clamp(130px, 20vw, 185px);
+        flex: 0 0 clamp(140px, 22vw, 200px);
       }
     }
 
@@ -718,7 +720,7 @@
 
         const badge = document.createElement("div");
         badge.className = "card-badge";
-        badge.textContent = "선택 안 됨";
+        badge.textContent = "×";
         card.appendChild(badge);
 
         card.addEventListener("click", () => onCardClick(cardData.name));
@@ -737,11 +739,14 @@
         if (mustSelected.includes(name)) {
           el.classList.add("selected-must");
           badge.textContent = "필수";
+          badge.style.cssText = "width:auto;height:auto;padding:4px 9px;border-radius:999px;font-size:.72rem;";
         } else if (bonusSelected.includes(name)) {
           el.classList.add("selected-bonus");
           badge.textContent = "보너스";
+          badge.style.cssText = "width:auto;height:auto;padding:4px 9px;border-radius:999px;font-size:.72rem;";
         } else {
-          badge.textContent = "선택 안 됨";
+          badge.textContent = "×";
+          badge.style.cssText = "";
         }
       });
     }
