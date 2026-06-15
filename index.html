@@ -1955,6 +1955,171 @@
   }
 }
 
+
+
+/* =========================================================
+   선택 카드 보기 최종 수정
+   - 필수/보너스 구역 분리 없이 선택한 카드만 한 화면에 표시
+   - 필수: 노란 테두리 / 보너스: 파란 테두리
+   - 노트북·태블릿·스마트폰 모두 화면 안에서 잘리지 않게 자동 축소
+   ========================================================= */
+.fullscreen-view {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  background: rgba(15, 13, 24, 0.94) !important;
+  z-index: 9999 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: clamp(10px, 2vw, 22px) !important;
+  overflow: hidden !important;
+}
+
+.fullscreen-view.active { display: flex !important; }
+
+.fullscreen-content {
+  width: min(1040px, calc(100vw - 24px)) !important;
+  max-height: calc(100dvh - 24px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 8px 8px 16px !important;
+  margin: 0 auto !important;
+}
+
+.fullscreen-title {
+  font-size: clamp(1rem, 2.2vw, 1.35rem) !important;
+  margin: 0 0 clamp(14px, 2.2vh, 22px) !important;
+}
+
+.fullscreen-section.must-section {
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: clamp(30px, 4vh, 38px) clamp(10px, 2vw, 18px) clamp(14px, 2vh, 20px) !important;
+  border: 2px solid rgba(255,255,255,.35) !important;
+  border-radius: 22px !important;
+  background: rgba(255,255,255,.06) !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,.28) !important;
+  overflow: visible !important;
+}
+
+.fullscreen-section.bonus-section { display: none !important; }
+
+.fullscreen-section-label.must {
+  background: #ffffff !important;
+  color: #4d415f !important;
+  top: -16px !important;
+}
+
+.fullscreen-row,
+.fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+.fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+.fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+.fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)) !important;
+  grid-auto-flow: row !important;
+  gap: clamp(10px, 1.8vw, 18px) !important;
+  width: 100% !important;
+  max-width: 880px !important;
+  margin: 0 auto !important;
+  padding: 4px 0 6px !important;
+  justify-content: center !important;
+  justify-items: center !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+.fullscreen-card {
+  width: 100% !important;
+  max-width: clamp(118px, 16vw, 190px) !important;
+  min-width: 0 !important;
+  aspect-ratio: 3 / 4 !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  overflow: visible !important;
+}
+
+.fullscreen-card.must-card {
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,.98),
+    0 0 0 9px rgba(255,210,90,.95),
+    0 0 28px 9px rgba(255,210,90,.55),
+    0 14px 30px rgba(0,0,0,.42) !important;
+  animation: none !important;
+}
+
+.fullscreen-card.bonus-card {
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,.98),
+    0 0 0 9px rgba(111,213,255,.95),
+    0 0 28px 9px rgba(111,213,255,.48),
+    0 14px 30px rgba(0,0,0,.42) !important;
+}
+
+.fullscreen-empty-text {
+  grid-column: 1 / -1;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 36px 0;
+  text-align: center;
+}
+
+@media (min-width: 700px) {
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(112px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 699px) {
+  .fullscreen-content {
+    width: calc(100vw - 20px) !important;
+    max-height: calc(100dvh - 20px) !important;
+  }
+
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    max-width: 390px !important;
+  }
+
+  .fullscreen-card {
+    max-width: min(42vw, 168px) !important;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 700px) {
+  .fullscreen-card {
+    max-width: clamp(100px, 13vw, 145px) !important;
+  }
+
+  .fullscreen-section.must-section {
+    padding-top: 28px !important;
+    padding-bottom: 12px !important;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .fullscreen-content { overflow-y: auto !important; }
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(84px, 1fr)) !important;
+    gap: 9px !important;
+  }
+  .fullscreen-card { max-width: 104px !important; }
+}
+
 </style>
 </head>
 <body>
@@ -2310,43 +2475,26 @@
       fullscreenBonusGrid.innerHTML = "";
       fullscreenStep.textContent = currentStep.toString();
 
-      const selectedTotal = mustSelected.length + bonusSelected.length;
-      const bonusSection = document.querySelector(".bonus-section");
+      const selectedCards = [
+        ...mustSelected.map((name) => ({ name, type: "must" })),
+        ...bonusSelected.map((name) => ({ name, type: "bonus" }))
+      ];
 
-      // 총 선택 카드가 4장 이하이면 한 줄로 표시
-      // 예: 필수 2 + 보너스 2, 필수 3 + 보너스 1
-      if (selectedTotal <= 4) {
-        mustSection.style.display = "block";
-        bonusSection.style.display = "none";
-        mustSectionLabel.textContent = "✨ 선택 카드";
+      mustSection.style.display = "block";
+      bonusSection.style.display = "none";
+      mustSectionLabel.textContent = "✨ 선택 카드";
 
-        mustSelected.forEach((name) => {
-          const cardData = getCardData(name);
-          if (cardData) fullscreenMustGrid.appendChild(createFullscreenCard(cardData, "must"));
-        });
-
-        bonusSelected.forEach((name) => {
-          const cardData = getCardData(name);
-          if (cardData) fullscreenMustGrid.appendChild(createFullscreenCard(cardData, "bonus"));
-        });
-
+      if (!selectedCards.length) {
+        const emptyText = document.createElement("div");
+        emptyText.className = "fullscreen-empty-text";
+        emptyText.textContent = "선택된 카드가 없습니다.";
+        fullscreenMustGrid.appendChild(emptyText);
         return;
       }
 
-      // 5장 이상이면 위: 필수 / 아래: 보너스
-      // 보너스가 4장을 넘어도 한 줄로 가로 스크롤 표시
-      mustSection.style.display = "block";
-      bonusSection.style.display = bonusSelected.length ? "block" : "none";
-      mustSectionLabel.textContent = "⭐ 필수 카드";
-
-      mustSelected.forEach((name) => {
+      selectedCards.forEach(({ name, type }) => {
         const cardData = getCardData(name);
-        if (cardData) fullscreenMustGrid.appendChild(createFullscreenCard(cardData, "must"));
-      });
-
-      bonusSelected.forEach((name) => {
-        const cardData = getCardData(name);
-        if (cardData) fullscreenBonusGrid.appendChild(createFullscreenCard(cardData, "bonus"));
+        if (cardData) fullscreenMustGrid.appendChild(createFullscreenCard(cardData, type));
       });
     }
 
