@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>제약 설계</title>
+  <title>제약 작용기 카드 선택</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -888,6 +888,157 @@
     .score-row input[type="number"] {
       font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       font-size: 1rem;
+    }
+
+  
+    /* 모바일 전체화면 최종 수정: 카드가 화면 안에 맞게 자동 축소 */
+    .fullscreen-view {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .fullscreen-content {
+      width: min(1160px, 100%);
+      max-height: none;
+    }
+
+    .fullscreen-row {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+      grid-auto-flow: row !important;
+      grid-auto-columns: unset !important;
+      justify-content: center !important;
+      justify-items: center !important;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      gap: clamp(8px, 1.8vw, 18px);
+      padding: 8px 4px 10px;
+      max-width: 100%;
+    }
+
+    .fullscreen-row .fullscreen-card {
+      width: 100%;
+      max-width: clamp(120px, 18vw, 220px);
+      min-width: 0 !important;
+    }
+
+    /* 선택 카드가 1~3장일 때도 가운데 모이도록 */
+    .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
+      grid-template-columns: minmax(120px, 220px) !important;
+    }
+
+    .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
+      grid-template-columns: repeat(2, minmax(120px, 220px)) !important;
+    }
+
+    .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
+      grid-template-columns: repeat(3, minmax(120px, 220px)) !important;
+    }
+
+    .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+      grid-template-columns: repeat(4, minmax(120px, 220px)) !important;
+    }
+
+    /* 스마트폰 세로 */
+    @media (max-width: 600px) and (orientation: portrait) {
+      .fullscreen-view {
+        padding: 46px 10px 16px;
+        align-items: flex-start;
+      }
+
+      .fullscreen-title {
+        font-size: 1.15rem;
+        margin-bottom: 20px;
+      }
+
+      .fullscreen-section {
+        padding: 28px 8px 14px;
+        margin-bottom: 22px;
+        border-radius: 16px;
+      }
+
+      .fullscreen-section-label {
+        left: 14px;
+        top: -17px;
+        font-size: 0.95rem;
+        padding: 7px 18px;
+      }
+
+      .fullscreen-row,
+      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+        grid-template-columns: repeat(auto-fit, minmax(86px, 1fr)) !important;
+        gap: 8px;
+      }
+
+      .fullscreen-row .fullscreen-card {
+        max-width: min(29vw, 128px);
+      }
+
+      .fullscreen-label {
+        font-size: 0.72rem;
+        padding: 3px 8px;
+        top: 5px;
+        right: 5px;
+      }
+
+      .close-fullscreen {
+        top: 10px;
+        right: 10px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.7rem;
+      }
+    }
+
+    /* 스마트폰 가로 */
+    @media (max-height: 560px) and (orientation: landscape) {
+      .fullscreen-view {
+        padding: 38px 12px 12px;
+        align-items: flex-start;
+      }
+
+      .fullscreen-title {
+        font-size: 1rem;
+        margin-bottom: 16px;
+      }
+
+      .fullscreen-section {
+        padding: 24px 10px 12px;
+        margin-bottom: 16px;
+      }
+
+      .fullscreen-row,
+      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
+      }
+
+      .fullscreen-row .fullscreen-card {
+        max-width: min(13.5vw, 135px);
+      }
+
+      .fullscreen-section-label {
+        font-size: 0.85rem;
+        padding: 5px 15px;
+      }
+
+      .fullscreen-label {
+        font-size: 0.68rem;
+        padding: 3px 7px;
+      }
+
+      .close-fullscreen {
+        top: 8px;
+        right: 10px;
+        width: 38px;
+        height: 38px;
+        font-size: 1.55rem;
+      }
     }
 
   </style>
