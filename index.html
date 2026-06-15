@@ -179,9 +179,9 @@
       }
     }
 
-    /* 스마트폰: 2열 */
+    /* 스마트폰: 4열 2행 */
     @media (max-width: 480px) {
-      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .cards-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
     }
 
     .card {
@@ -546,22 +546,22 @@
     }
 
 
-    /* 반응형: 태블릿 — 카드 그리드 한 줄 + 선택카드 한 줄 가운데 */
+    /* 반응형: 태블릿 — 선택카드 한 줄 가운데, 간격 넉넉히 */
     @media (min-width: 481px) and (max-width: 900px) {
       .selected-cards-grid {
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: center;
-        gap: 16px;
-        padding-bottom: 8px;
+        gap: 24px;
+        padding: 4px 8px 12px;
         max-width: 100%;
       }
       .selected-card-item {
-        flex: 0 0 clamp(110px, 18vw, 165px);
+        flex: 0 0 clamp(130px, 20vw, 185px);
       }
     }
 
-    /* 반응형: 스마트폰 세로 — 2열 */
+    /* 반응형: 스마트폰 세로 — 선택카드 2열 */
     @media (max-width: 480px) {
       .selected-cards-inner { padding: 16px 12px 20px; }
       .selected-section-box { padding: 30px 10px 16px; }
@@ -572,7 +572,8 @@
         max-width: 100%;
       }
       .selected-card-item {
-        flex: 0 0 min(42vw, 155px);
+        flex: 0 0 calc(50% - 6px);
+        max-width: 160px;
       }
       .selected-card-label { font-size: .7rem; padding: 3px 8px; top: 5px; right: 5px; }
       .selected-section-label { font-size: .85rem; padding: 5px 14px; }
@@ -799,11 +800,6 @@
 
         selectedCardsGrid.appendChild(item);
       });
-
-      // 부드럽게 스크롤
-      setTimeout(() => {
-        selectedCardsSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }, 60);
     }
 
     function onCardClick(name) {
