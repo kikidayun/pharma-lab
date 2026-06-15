@@ -45,8 +45,21 @@
       background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,247,253,.9));
       border-radius: 18px;
       box-shadow: 0 18px 45px rgba(60, 30, 100, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.7);
-      padding: 16px 18px;
+      padding: 16px 18px 32px;
       backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app::before {
+      content: "✦  ✧  ✦";
+      position: absolute;
+      right: 24px;
+      bottom: 18px;
+      color: rgba(123, 75, 218, .12);
+      font-size: 3rem;
+      font-weight: 900;
+      pointer-events: none;
     }
 
     header {
@@ -61,17 +74,21 @@
     }
 
     header h1 {
-      font-size: 1.4rem;
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
+      font-size: 1.45rem;
+      font-weight: 400;
       margin: 0;
       display: flex;
       align-items: center;
       gap: 8px;
       color: var(--primary);
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 0 rgba(255,255,255,.9);
     }
 
     header h1::before {
       content: "🔮";
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
 
     .status {
@@ -79,15 +96,17 @@
       flex-wrap: wrap;
       gap: 8px;
       align-items: center;
-      font-size: 0.95rem;
     }
 
     .badge {
-      padding: 6px 10px;
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
+      padding: 6px 12px;
       border-radius: 99px;
       background: var(--primary-soft);
       color: var(--primary);
-      font-weight: 600;
+      font-weight: 400;
+      font-size: 0.95rem;
+      box-shadow: inset 0 -2px 0 rgba(255,255,255,.55), 0 4px 10px rgba(123,75,218,.12);
     }
 
     .badge.score {
@@ -102,39 +121,37 @@
     }
 
     .layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    @media (max-width: 900px) {
-      .layout { grid-template-columns: 1fr; }
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .panel {
       background: var(--bg-panel);
       border-radius: 14px;
-      padding: 10px 12px;
+      padding: 12px 14px;
       box-shadow: 0 10px 20px rgba(80, 40, 150, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(219, 198, 255, .85);
     }
 
     .section-title {
-      font-weight: 700;
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
+      font-weight: 400;
+      font-size: 1.05rem;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 6px;
       color: var(--primary);
-      font-size: 0.95rem;
     }
 
     .section-title .emoji { font-size: 1.1rem; }
 
     .helper-text {
-      font-size: 0.8rem;
+      font-size: 0.84rem;
       color: #777;
       margin-top: 2px;
+      line-height: 1.5;
     }
 
     .cards-header {
@@ -148,20 +165,30 @@
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 8px;
+      gap: 12px;
+      margin-top: 10px;
     }
 
-    @media (max-width: 700px) {
-      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* 태블릿: 8장 한 줄, 가로 스크롤 허용 */
+    @media (min-width: 481px) and (max-width: 900px) {
+      .cards-grid {
+        grid-template-columns: repeat(8, minmax(76px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 4px;
+        gap: 8px;
+      }
+    }
+
+    /* 스마트폰: 2열 */
+    @media (max-width: 480px) {
+      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
     }
 
     .card {
       position: relative;
       aspect-ratio: 3 / 4;
-      border-radius: 12px;
-      padding: 8px;
-      background: radial-gradient(circle at top, #fff8e7, var(--bg-card));
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff, #fff9fd);
       border: 1px solid var(--card-border);
       box-shadow: 0 4px 10px rgba(80, 40, 150, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.9);
       display: flex;
@@ -190,14 +217,16 @@
       height: 100%;
       object-fit: contain;
       display: block;
+      filter: saturate(1.05);
     }
 
     .card-badge {
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       position: absolute;
       top: 4px;
       right: 4px;
-      font-size: 0.7rem;
-      padding: 2px 8px;
+      font-size: .75rem;
+      padding: 4px 10px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.9);
       color: #666;
@@ -234,15 +263,16 @@
       border-radius: 999px;
       border: 1px solid rgba(123, 75, 218, 0.4);
       overflow: hidden;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
 
     .mode-btn {
-      padding: 4px 12px;
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
+      padding: 5px 14px;
       border: none;
       background: transparent;
       cursor: pointer;
-      font-weight: 700;
+      font-weight: 400;
       color: #666;
     }
 
@@ -252,22 +282,22 @@
     }
 
     button {
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       border: none;
       border-radius: 999px;
-      padding: 8px 14px;
+      padding: 8px 16px;
       font-size: 0.9rem;
       cursor: pointer;
-      font-weight: 700;
+      font-weight: 400;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease, background 0.12s ease;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
     }
 
     button:active {
       transform: translateY(1px) scale(0.99);
-      box-shadow: none;
       filter: brightness(0.97);
     }
 
@@ -275,414 +305,36 @@
       opacity: 0.55;
       cursor: not-allowed;
       transform: none;
-      box-shadow: none;
-      filter: grayscale(0.25);
-    }
-
-    .btn-main {
-      background: linear-gradient(135deg, #7b4bda, #c173ff);
-      color: white;
-      box-shadow: 0 6px 12px rgba(123, 75, 218, 0.35);
-    }
-
-    .btn-sub {
-      background: #ffffff;
-      color: #555;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(230, 230, 255, 0.9);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: #555;
-      border: 1px dashed rgba(120, 120, 160, 0.5);
-      box-shadow: none;
-    }
-
-    .score-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-self: start;
-    }
-
-    .score-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      align-items: center;
-      margin-top: 8px;
-      font-size: 0.9rem;
-    }
-
-    .score-row input[type="number"] {
-      width: 78px;
-      padding: 7px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(123, 75, 218, 0.4);
-      font-size: 0.9rem;
-      text-align: center;
-      outline: none;
-    }
-
-    .score-row input[type="number"]:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(123, 75, 218, 0.18);
-    }
-
-    .actions {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      align-items: stretch;
-    }
-
-    .warning {
-      color: #b23b00;
-      font-size: 0.8rem;
-      margin-top: 6px;
-    }
-
-    .fullscreen-view {
-      position: fixed;
-      inset: 0;
-      background: rgba(20, 20, 30, 0.92);
-      z-index: 999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 22px 44px;
-    }
-
-    .fullscreen-view.active {
-      display: flex;
-    }
-
-    .fullscreen-content {
-      width: min(1160px, 100%);
-    }
-
-    .fullscreen-title {
-      color: #fff;
-      text-align: center;
-      font-size: 1.35rem;
-      font-weight: 900;
-      margin-bottom: 24px;
-      letter-spacing: 0.02em;
-    }
-
-    .fullscreen-section {
-      position: relative;
-      border-radius: 20px;
-      padding: 34px 18px 22px;
-      margin-bottom: 26px;
-      border: 2px solid transparent;
-      overflow: visible;
-    }
-
-    .fullscreen-section.must-section {
-      background: radial-gradient(circle at center, rgba(255,210,90,.26), rgba(255,210,90,.08) 44%, rgba(255,210,90,0) 72%);
-      border-color: rgba(255,210,90,.65);
-      box-shadow: 0 0 28px rgba(255,210,90,.28), inset 0 0 30px rgba(255,210,90,.12);
-    }
-
-    .fullscreen-section.bonus-section {
-      background: radial-gradient(circle at center, rgba(111,213,255,.18), rgba(111,213,255,.06) 45%, rgba(111,213,255,0) 72%);
-      border-color: rgba(111,213,255,.48);
-      box-shadow: 0 0 20px rgba(111,213,255,.16), inset 0 0 22px rgba(111,213,255,.08);
-    }
-
-    .fullscreen-section-label {
-      position: absolute;
-      left: 22px;
-      top: -18px;
-      padding: 8px 22px;
-      border-radius: 999px;
-      font-size: 1.05rem;
-      font-weight: 900;
-      box-shadow: 0 6px 16px rgba(0,0,0,.22);
-      z-index: 10;
-      white-space: nowrap;
-    }
-
-    .fullscreen-section-label.must {
-      background: var(--must);
-      color: #5b3a00;
-    }
-
-    .fullscreen-section-label.bonus {
-      background: var(--bonus);
-      color: #004b68;
-    }
-
-    .fullscreen-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(160px, 1fr));
-      gap: 18px;
-      min-height: 220px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .fullscreen-card {
-      position: relative;
-      aspect-ratio: 3 / 4;
-      border-radius: 14px;
-      overflow: visible;
-      background: #fff;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .fullscreen-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 14px;
-      display: block;
-      background: #fff;
-    }
-
-    .fullscreen-card.empty {
-      opacity: .16;
-      border: 2px dashed rgba(255,255,255,.7);
-      background: rgba(255,255,255,.08);
-      box-shadow: none;
-    }
-
-    .fullscreen-card.must-card {
-      box-shadow:
-        0 0 0 4px rgba(255,255,255,.95),
-        0 0 0 8px rgba(255,210,90,.85),
-        0 0 35px 12px rgba(255,210,90,.78),
-        0 18px 35px rgba(0,0,0,.45);
-      animation: mustGlow 1.8s ease-in-out infinite alternate;
-    }
-
-    .fullscreen-card.bonus-card {
-      box-shadow:
-        0 0 0 4px rgba(255,255,255,.95),
-        0 0 0 7px rgba(111,213,255,.8),
-        0 0 26px 8px rgba(111,213,255,.6),
-        0 18px 35px rgba(0,0,0,.42);
-    }
-
-    @keyframes mustGlow {
-      from {
-        filter: brightness(1);
-        transform: translateY(0);
-      }
-      to {
-        filter: brightness(1.08);
-        transform: translateY(-1px);
-      }
-    }
-
-    .fullscreen-label {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 900;
-      z-index: 2;
-      box-shadow: 0 4px 10px rgba(0,0,0,.18);
-    }
-
-    .fullscreen-label.must {
-      background: var(--must);
-      color: #5b3a00;
-    }
-
-    .fullscreen-label.bonus {
-      background: var(--bonus);
-      color: #004b68;
-    }
-
-    .close-fullscreen {
-      position: fixed;
-      top: 18px;
-      right: 24px;
-      font-size: 2rem;
-      background: white;
-      color: #333;
-      width: 46px;
-      height: 46px;
-      justify-content: center;
-      padding: 0;
-      box-shadow: 0 10px 24px rgba(0,0,0,.25);
-    }
-
-
-  
-    .app {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .app::before {
-      content: "✦  ✧  ✦";
-      position: absolute;
-      right: 24px;
-      bottom: 18px;
-      color: rgba(123, 75, 218, .12);
-      font-size: 3rem;
-      font-weight: 900;
-      pointer-events: none;
-    }
-
-    .panel {
-      border: 1px solid rgba(219, 198, 255, .85);
-    }
-
-    header h1 {
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      text-shadow: 0 2px 0 rgba(255,255,255,.9);
-    }
-
-    .badge {
-      box-shadow: inset 0 -2px 0 rgba(255,255,255,.55), 0 4px 10px rgba(123,75,218,.12);
-    }
-
-    .cards-grid {
-      gap: 12px;
-    }
-
-    .card {
-      border-radius: 18px;
-      background: linear-gradient(180deg, #ffffff, #fff9fd);
-    }
-
-    .card img {
-      filter: saturate(1.05);
-    }
-
-    .card-badge {
-      font-size: .75rem;
-      padding: 4px 10px;
-    }
-
-    .score-panel {
-      width: 100%;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(250,243,255,.92));
-    }
-
-    .score-panel > div {
-      width: 100%;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      grid-template-areas:
-        "title controls";
-      align-items: center;
-      gap: 14px;
-    }
-
-    .score-panel .section-title {
-      grid-area: title;
-      margin-bottom: 0;
-      font-size: 1rem;
-      white-space: nowrap;
-    }
-
-    .score-row {
-      margin-top: 0;
-    }
-
-    .score-panel .actions,
-    .score-panel .score-row {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-
-    .score-panel .score-row {
-      gap: 8px;
-      white-space: nowrap;
-    }
-
-    .score-panel .actions {
-      margin-top: 0;
-      gap: 8px;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-    }
-
-    .score-panel .score-row,
-    .score-panel .actions {
-      grid-area: controls;
-    }
-
-    .score-panel .score-row {
-      justify-self: start;
-    }
-
-    .score-panel .actions {
-      justify-self: end;
-      padding-left: 230px;
-    }
-
-    .score-row input[type="number"] {
-      background: #fff;
-      border: 2px solid rgba(193, 160, 255, .55);
-      box-shadow: inset 0 2px 5px rgba(123,75,218,.06);
     }
 
     .btn-main {
       background: linear-gradient(135deg, #8d5cff, #d467ff);
+      color: white;
       box-shadow: 0 7px 14px rgba(141, 92, 255, .28);
     }
 
-    .btn-sub, .btn-ghost {
+    .btn-sub {
       background: rgba(255,255,255,.82);
-      border: 2px solid rgba(219, 198, 255, .8);
       color: #5d5170;
+      border: 2px solid rgba(219, 198, 255, .8);
     }
 
     .btn-ghost {
-      border-style: dashed;
+      background: transparent;
+      color: #5d5170;
+      border: 2px dashed rgba(219, 198, 255, .8);
     }
 
-    @media (max-width: 900px) {
-      .score-panel > div {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "title"
-          "controls";
-      }
-
-      .score-panel .score-row,
-      .score-panel .actions {
-        grid-area: auto;
-        justify-self: stretch;
-        padding-left: 0;
-      }
-
-      .score-panel .actions {
-        justify-content: stretch;
-      }
-
-      .score-panel .actions button {
-        flex: 1 1 160px;
-      }
+    /* 점수 패널 */
+    .score-panel {
+      padding: 12px 16px;
     }
 
-  
     .score-inner {
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -699,2043 +351,234 @@
       margin-bottom: 0;
     }
 
-    .score-inner .score-row,
-    .score-inner .actions {
-      margin-top: 0;
-      padding-left: 0;
+    .score-row {
       display: flex;
-      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 0;
+      white-space: nowrap;
+    }
+
+    .score-row input[type="number"] {
+      width: 78px;
+      padding: 7px 8px;
+      border-radius: 999px;
+      border: 2px solid rgba(193, 160, 255, .55);
+      font-size: 1rem;
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
+      text-align: center;
+      outline: none;
+      background: #fff;
+      box-shadow: inset 0 2px 5px rgba(123,75,218,.06);
+    }
+
+    .score-row input[type="number"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(123, 75, 218, 0.18);
+    }
+
+    .actions {
+      display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
 
-    .score-inner .actions {
-      justify-content: flex-end;
-    }
-
-    .score-inner .actions button {
-      min-width: 160px;
-    }
-
-    #msg {
+    .warning {
+      color: #b23b00;
+      font-size: 0.85rem;
       width: 100%;
+      margin-top: 4px;
     }
+
+    #msg { width: 100%; }
 
     @media (max-width: 760px) {
-      .score-inner,
-      .score-controls,
-      .score-inner .score-row,
-      .score-inner .actions {
+      .score-inner {
+        flex-direction: column;
         align-items: stretch;
       }
-
       .score-controls {
         flex-direction: column;
+        align-items: stretch;
       }
-
-      .score-inner .actions button,
-      .score-inner .score-row button {
-        width: 100%;
+      .score-row, .actions {
+        justify-content: stretch;
       }
-    }
-
-  
-    /* 전체화면 카드 줄: 보너스가 많아도 한 줄 유지 + 작은 화면에서는 가로 스크롤 */
-    .fullscreen-row {
-      display: grid !important;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(150px, 1fr);
-      grid-template-columns: none !important;
-      gap: 18px;
-      min-height: 220px;
-      align-items: center;
-      justify-content: start;
-      overflow-x: auto;
-      overflow-y: visible;
-      padding: 10px 8px 16px;
-      scroll-snap-type: x proximity;
-    }
-
-    .fullscreen-row .fullscreen-card {
-      min-width: 150px;
-      max-width: 245px;
-      width: 100%;
-      scroll-snap-align: center;
-    }
-
-    .fullscreen-row::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .fullscreen-row::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,.35);
-      border-radius: 999px;
-    }
-
-    .fullscreen-row::-webkit-scrollbar-track {
-      background: rgba(255,255,255,.08);
-      border-radius: 999px;
-    }
-
-    @media (min-width: 1000px) {
-      .fullscreen-row {
-        grid-auto-columns: minmax(170px, 1fr);
+      .score-row input[type="number"] {
+        flex: 0 0 78px;
+      }
+      .actions button, .score-row button {
+        flex: 1 1 140px;
       }
     }
 
-    @media (max-width: 850px) {
-      .fullscreen-view {
-        padding: 54px 14px 18px;
-        overflow-y: auto;
-        align-items: flex-start;
-      }
-
-      .fullscreen-row {
-        grid-auto-columns: minmax(135px, 42vw);
-        min-height: 190px;
-      }
+    /* =====================================================
+       선택 카드 인라인 섹션 (팝업 대신 페이지 하단에 표시)
+       ===================================================== */
+    .selected-cards-section {
+      margin-top: 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(20, 16, 40, 0.96), rgba(30, 20, 55, 0.94));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 18px 40px rgba(20, 10, 60, 0.35);
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(.4,0,.2,1), opacity 0.35s ease;
     }
 
-    @media (max-width: 520px) {
-      .fullscreen-title {
-        font-size: 1.1rem;
-      }
-
-      .fullscreen-section {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-
-      .fullscreen-row {
-        grid-auto-columns: minmax(120px, 62vw);
-        gap: 12px;
-      }
+    .selected-cards-section.hidden {
+      display: none;
     }
 
-  
-    /* 최종 수정: 전체화면에서 선택 카드가 1~3장일 때 가운데 정렬 */
-    .fullscreen-row {
-      justify-content: center !important;
-      justify-items: center;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 980px;
+    .selected-cards-inner {
+      padding: 22px 20px 24px;
     }
 
-    .fullscreen-row .fullscreen-card {
-      width: min(220px, 100%);
-    }
-
-    /* 보너스가 5장 이상처럼 많아질 때는 한 줄 유지 + 가로 스크롤 */
-    .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-      justify-content: start !important;
-      max-width: 100%;
-    }
-
-    @supports not selector(:has(*)) {
-      .fullscreen-row {
-        justify-content: center !important;
-      }
-    }
-
-  
-    /* 폰트 최종 수정 */
-    header h1,
-    .section-title,
-    .fullscreen-title,
-    .fullscreen-section-label,
-    .mode-btn,
-    button,
-    .badge,
-    .card-badge,
-    .fullscreen-label {
-      font-family: "Jua", "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    .selected-cards-title {
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
+      color: #fff;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 400;
+      margin: 0 0 18px;
+      text-align: center;
       letter-spacing: 0.01em;
     }
 
-    body,
-    input,
-    label,
-    .helper-text,
-    .warning {
-      font-family: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    .selected-section-box {
+      position: relative;
+      border-radius: 18px;
+      padding: 32px 16px 18px;
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
     }
 
-    header h1 {
-      font-size: 1.55rem;
-      font-weight: 400;
-    }
-
-    .section-title {
-      font-size: 1.05rem;
-      font-weight: 400;
-    }
-
-    .helper-text {
-      font-size: 0.86rem;
-      line-height: 1.5;
-    }
-
-    button,
-    .mode-btn,
-    .badge,
-    .card-badge,
-    .fullscreen-label {
-      font-weight: 400;
-    }
-
-    .score-row input[type="number"] {
+    .selected-section-label {
+      position: absolute;
+      left: 18px;
+      top: -16px;
+      padding: 7px 20px;
+      border-radius: 999px;
       font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      font-weight: 400;
+      background: #fff;
+      color: #4d415f;
+      box-shadow: 0 5px 14px rgba(0,0,0,.18);
+      white-space: nowrap;
     }
 
-  
-    /* 모바일 전체화면 최종 수정: 카드가 화면 안에 맞게 자동 축소 */
-    .fullscreen-view {
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    .fullscreen-content {
-      width: min(1160px, 100%);
-      max-height: none;
-    }
-
-    .fullscreen-row {
-      display: grid !important;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
-      grid-auto-flow: row !important;
-      grid-auto-columns: unset !important;
-      justify-content: center !important;
-      justify-items: center !important;
-      overflow-x: hidden !important;
-      overflow-y: visible !important;
-      gap: clamp(8px, 1.8vw, 18px);
-      padding: 8px 4px 10px;
-      max-width: 100%;
-    }
-
-    .fullscreen-row .fullscreen-card {
+    .selected-cards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(10px, 2vw, 20px);
       width: 100%;
-      max-width: clamp(120px, 18vw, 220px);
-      min-width: 0 !important;
+      max-width: 920px;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: flex-start;
     }
 
-    /* 선택 카드가 1~3장일 때도 가운데 모이도록 */
-    .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
-      grid-template-columns: minmax(120px, 220px) !important;
+    .selected-card-item {
+      position: relative;
+      flex: 0 0 clamp(130px, 16%, 200px);
+      aspect-ratio: 3 / 4;
+      border-radius: 14px;
+      overflow: visible;
+      background: #fff;
     }
 
-    .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
-      grid-template-columns: repeat(2, minmax(120px, 220px)) !important;
+    .selected-card-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 14px;
+      display: block;
     }
 
-    .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
-      grid-template-columns: repeat(3, minmax(120px, 220px)) !important;
+    .selected-card-item.must-card {
+      box-shadow:
+        0 0 0 4px rgba(255,255,255,.98),
+        0 0 0 9px rgba(255,210,90,.95),
+        0 0 28px 9px rgba(255,210,90,.55),
+        0 14px 30px rgba(0,0,0,.42);
     }
 
-    .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-      grid-template-columns: repeat(4, minmax(120px, 220px)) !important;
+    .selected-card-item.bonus-card {
+      box-shadow:
+        0 0 0 4px rgba(255,255,255,.98),
+        0 0 0 9px rgba(111,213,255,.95),
+        0 0 28px 9px rgba(111,213,255,.48),
+        0 14px 30px rgba(0,0,0,.42);
     }
 
-    /* 스마트폰 세로 */
-    @media (max-width: 600px) and (orientation: portrait) {
-      .fullscreen-view {
-        padding: 46px 10px 16px;
-        align-items: flex-start;
-      }
-
-      .fullscreen-title {
-        font-size: 1.15rem;
-        margin-bottom: 20px;
-      }
-
-      .fullscreen-section {
-        padding: 28px 8px 14px;
-        margin-bottom: 22px;
-        border-radius: 16px;
-      }
-
-      .fullscreen-section-label {
-        left: 14px;
-        top: -17px;
-        font-size: 0.95rem;
-        padding: 7px 18px;
-      }
-
-      .fullscreen-row,
-      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-      .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-        grid-template-columns: repeat(auto-fit, minmax(86px, 1fr)) !important;
-        gap: 8px;
-      }
-
-      .fullscreen-row .fullscreen-card {
-        max-width: min(29vw, 128px);
-      }
-
-      .fullscreen-label {
-        font-size: 0.72rem;
-        padding: 3px 8px;
-        top: 5px;
-        right: 5px;
-      }
-
-      .close-fullscreen {
-        top: 10px;
-        right: 10px;
-        width: 42px;
-        height: 42px;
-        font-size: 1.7rem;
-      }
+    .selected-card-label {
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 400;
+      z-index: 2;
+      box-shadow: 0 3px 8px rgba(0,0,0,.2);
+      white-space: nowrap;
     }
 
-    /* 스마트폰 가로 */
-    @media (max-height: 560px) and (orientation: landscape) {
-      .fullscreen-view {
-        padding: 38px 12px 12px;
-        align-items: flex-start;
-      }
+    .selected-card-label.must {
+      background: var(--must);
+      color: #5b3a00;
+    }
 
-      .fullscreen-title {
-        font-size: 1rem;
-        margin-bottom: 16px;
-      }
+    .selected-card-label.bonus {
+      background: var(--bonus);
+      color: #004b68;
+    }
 
-      .fullscreen-section {
-        padding: 24px 10px 12px;
-        margin-bottom: 16px;
-      }
+    .selected-empty-text {
+      grid-column: 1 / -1;
+      color: rgba(255,255,255,.55);
+      font-size: 1rem;
+      padding: 30px 0;
+      text-align: center;
+    }
 
-      .fullscreen-row,
-      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-      .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
-      }
 
-      .fullscreen-row .fullscreen-card {
-        max-width: min(13.5vw, 135px);
+    /* 반응형: 태블릿 — 카드 그리드 한 줄 + 선택카드 한 줄 가운데 */
+    @media (min-width: 481px) and (max-width: 900px) {
+      .selected-cards-grid {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: center;
+        gap: 16px;
+        padding-bottom: 8px;
+        max-width: 100%;
       }
-
-      .fullscreen-section-label {
-        font-size: 0.85rem;
-        padding: 5px 15px;
-      }
-
-      .fullscreen-label {
-        font-size: 0.68rem;
-        padding: 3px 7px;
-      }
-
-      .close-fullscreen {
-        top: 8px;
-        right: 10px;
-        width: 38px;
-        height: 38px;
-        font-size: 1.55rem;
+      .selected-card-item {
+        flex: 0 0 clamp(110px, 18vw, 165px);
       }
     }
 
-  
-    /* ✅ 모바일/태블릿 전체화면 최종 고정
-       - 세로 화면: 카드가 화면 안에서 잘리지 않도록 자동 축소
-       - 가로 화면: 화면 높이에 맞춰 자동 축소
-       - 기존 가로 스크롤 설정을 강하게 덮어씀
-    */
-    @media (max-width: 768px) {
-      .fullscreen-view {
-        padding: 52px 10px 18px !important;
-        align-items: flex-start !important;
-        justify-content: center !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
+    /* 반응형: 스마트폰 세로 — 2열 */
+    @media (max-width: 480px) {
+      .selected-cards-inner { padding: 16px 12px 20px; }
+      .selected-section-box { padding: 30px 10px 16px; }
+      .selected-cards-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        max-width: 100%;
       }
-
-      .fullscreen-content {
-        width: 100% !important;
-        max-width: 100% !important;
+      .selected-card-item {
+        flex: 0 0 min(42vw, 155px);
       }
-
-      .fullscreen-title {
-        font-size: 1.15rem !important;
-        margin-bottom: 18px !important;
-      }
-
-      .fullscreen-section {
-        width: 100% !important;
-        padding: 30px 8px 14px !important;
-        margin-bottom: 22px !important;
-        border-radius: 16px !important;
-        overflow: visible !important;
-      }
-
-      .fullscreen-section-label {
-        left: 14px !important;
-        top: -18px !important;
-        font-size: 0.92rem !important;
-        padding: 7px 17px !important;
-      }
-
-      .fullscreen-row {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 8px !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        min-height: 0 !important;
-        overflow-x: hidden !important;
-        overflow-y: visible !important;
-        padding: 6px 0 8px !important;
-        scroll-snap-type: none !important;
-      }
-
-      .fullscreen-row .fullscreen-card {
-        flex: 0 1 calc((100% - 24px) / 4) !important;
-        width: calc((100% - 24px) / 4) !important;
-        min-width: 0 !important;
-        max-width: 118px !important;
-        scroll-snap-align: unset !important;
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) .fullscreen-card {
-        flex-basis: min(56vw, 180px) !important;
-        width: min(56vw, 180px) !important;
-        max-width: 180px !important;
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) .fullscreen-card {
-        flex-basis: min(40vw, 150px) !important;
-        width: min(40vw, 150px) !important;
-        max-width: 150px !important;
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) .fullscreen-card {
-        flex-basis: min(29vw, 130px) !important;
-        width: min(29vw, 130px) !important;
-        max-width: 130px !important;
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) .fullscreen-card {
-        flex-basis: calc((100% - 24px) / 4) !important;
-        width: calc((100% - 24px) / 4) !important;
-        max-width: 118px !important;
-      }
-
-      .fullscreen-label {
-        font-size: 0.68rem !important;
-        padding: 3px 7px !important;
-        top: 5px !important;
-        right: 5px !important;
-      }
-
-      .close-fullscreen {
-        top: 10px !important;
-        right: 10px !important;
-        width: 42px !important;
-        height: 42px !important;
-        font-size: 1.7rem !important;
-        z-index: 1001 !important;
-      }
+      .selected-card-label { font-size: .7rem; padding: 3px 8px; top: 5px; right: 5px; }
+      .selected-section-label { font-size: .85rem; padding: 5px 14px; }
+      .selected-cards-title { font-size: 1rem; margin-bottom: 14px; }
     }
-
-    @media (max-width: 768px) and (orientation: landscape) {
-      .fullscreen-view {
-        padding: 38px 10px 12px !important;
-      }
-
-      .fullscreen-title {
-        font-size: 1rem !important;
-        margin-bottom: 14px !important;
-      }
-
-      .fullscreen-section {
-        padding: 24px 8px 12px !important;
-        margin-bottom: 14px !important;
-      }
-
-      .fullscreen-row {
-        gap: 7px !important;
-      }
-
-      .fullscreen-row .fullscreen-card {
-        flex: 0 1 min(14vw, 118px) !important;
-        width: min(14vw, 118px) !important;
-        max-width: 118px !important;
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) .fullscreen-card {
-        flex-basis: min(22vw, 145px) !important;
-        width: min(22vw, 145px) !important;
-        max-width: 145px !important;
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) .fullscreen-card {
-        flex-basis: min(18vw, 130px) !important;
-        width: min(18vw, 130px) !important;
-        max-width: 130px !important;
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) .fullscreen-card {
-        flex-basis: min(15vw, 122px) !important;
-        width: min(15vw, 122px) !important;
-        max-width: 122px !important;
-      }
-
-      .close-fullscreen {
-        width: 38px !important;
-        height: 38px !important;
-        font-size: 1.55rem !important;
-      }
-    }
-
-  
-/* ===== 모바일 세로: 2열 + 세로 스크롤 ===== */
-@media (max-width:768px) and (orientation:portrait){
-  .fullscreen-view{
-    overflow-y:auto!important;
-    overflow-x:hidden!important;
-    align-items:flex-start!important;
-  }
-  .fullscreen-row{
-    display:grid!important;
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:12px!important;
-    justify-items:center!important;
-    overflow:visible!important;
-  }
-  .fullscreen-row .fullscreen-card{
-    width:100%!important;
-    max-width:180px!important;
-    min-width:0!important;
-  }
-}
-/* ===== 모바일 가로: 한줄 가운데 ===== */
-@media (max-width:768px) and (orientation:landscape){
-  .fullscreen-row{
-    display:flex!important;
-    flex-wrap:nowrap!important;
-    justify-content:center!important;
-    gap:10px!important;
-    overflow-x:auto!important;
-  }
-  .fullscreen-row .fullscreen-card{
-    width:110px!important;
-    flex:0 0 110px!important;
-  }
-}
-
-
-/* ===== 최종 반응형 정리: 스마트폰만 2열, 태블릿은 노트북형 ===== */
-
-/* 태블릿: 노트북처럼 넓게 보기 */
-@media (min-width: 601px) and (max-width: 1180px) {
-  .fullscreen-view {
-    padding: 46px 28px 24px !important;
-    align-items: center !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: min(1080px, 100%) !important;
-    max-width: 1080px !important;
-  }
-
-  .fullscreen-row {
-    display: grid !important;
-    grid-auto-flow: row !important;
-    grid-auto-columns: unset !important;
-    grid-template-columns: repeat(4, minmax(120px, 1fr)) !important;
-    justify-content: center !important;
-    justify-items: center !important;
-    gap: 16px !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-    max-width: 100% !important;
-  }
-
-  .fullscreen-row .fullscreen-card {
-    width: 100% !important;
-    max-width: 190px !important;
-    min-width: 0 !important;
-    flex: unset !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
-    grid-template-columns: minmax(130px, 190px) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
-    grid-template-columns: repeat(2, minmax(130px, 190px)) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
-    grid-template-columns: repeat(3, minmax(130px, 190px)) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, minmax(120px, 190px)) !important;
-  }
-}
-
-/* 스마트폰 세로만 2열 */
-@media (max-width: 600px) and (orientation: portrait) {
-  .fullscreen-view {
-    padding: 52px 10px 18px !important;
-    align-items: flex-start !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-  }
-
-  .fullscreen-row {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    grid-auto-flow: row !important;
-    gap: 12px !important;
-    justify-items: center !important;
-    overflow: visible !important;
-  }
-
-  .fullscreen-row .fullscreen-card {
-    width: 100% !important;
-    max-width: 180px !important;
-    min-width: 0 !important;
-    flex: unset !important;
-  }
-}
-
-/* 스마트폰 가로는 한 줄 유지 */
-@media (max-width: 900px) and (max-height: 560px) and (orientation: landscape) {
-  .fullscreen-row {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    overflow-x: auto !important;
-  }
-
-  .fullscreen-row .fullscreen-card {
-    width: 110px !important;
-    flex: 0 0 110px !important;
-  }
-}
-
-
-/* ===== 태블릿 전체화면 최종 보정: 진짜 전체화면 + 카드 축소 ===== */
-@media (min-width: 601px) and (max-width: 1180px) {
-  .fullscreen-view {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    min-height: 100vh !important;
-    padding: 28px 18px 18px !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: 100% !important;
-    max-width: 1060px !important;
-    margin: 0 auto !important;
-  }
-
-  .fullscreen-title {
-    font-size: 1.18rem !important;
-    margin-bottom: 18px !important;
-  }
-
-  .fullscreen-section {
-    padding: 26px 14px 14px !important;
-    margin-bottom: 18px !important;
-    border-radius: 18px !important;
-  }
-
-  .fullscreen-section-label {
-    top: -17px !important;
-    left: 18px !important;
-    font-size: 0.95rem !important;
-    padding: 7px 18px !important;
-  }
-
-  .fullscreen-row {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(100px, 150px)) !important;
-    gap: 14px !important;
-    min-height: 0 !important;
-    max-width: 720px !important;
-    width: 100% !important;
-    justify-content: center !important;
-    justify-items: center !important;
-    align-items: center !important;
-    margin: 0 auto !important;
-    overflow: visible !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
-    grid-template-columns: minmax(110px, 150px) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
-    grid-template-columns: repeat(2, minmax(110px, 150px)) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
-    grid-template-columns: repeat(3, minmax(105px, 150px)) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, minmax(100px, 150px)) !important;
-  }
-
-  .fullscreen-card {
-    width: 100% !important;
-    max-width: 150px !important;
-    min-width: 0 !important;
-  }
-
-  .fullscreen-label {
-    font-size: 0.74rem !important;
-    padding: 4px 9px !important;
-    top: 6px !important;
-    right: 6px !important;
-  }
-
-  .close-fullscreen {
-    top: 14px !important;
-    right: 16px !important;
-    width: 42px !important;
-    height: 42px !important;
-    font-size: 1.7rem !important;
-  }
-
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    max-width: 100% !important;
-    justify-content: flex-start !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    padding: 8px 4px 12px !important;
-  }
-
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-    flex: 0 0 145px !important;
-    width: 145px !important;
-    max-width: 145px !important;
-  }
-}
-
-/* 태블릿 가로 화면이 낮을 때는 조금 더 압축 */
-@media (min-width: 601px) and (max-width: 1180px) and (max-height: 760px) {
-  .fullscreen-view {
-    padding-top: 18px !important;
-  }
-
-  .fullscreen-title {
-    font-size: 1.05rem !important;
-    margin-bottom: 14px !important;
-  }
-
-  .fullscreen-section {
-    padding: 24px 12px 12px !important;
-    margin-bottom: 14px !important;
-  }
-
-  .fullscreen-row {
-    grid-template-columns: repeat(4, minmax(90px, 128px)) !important;
-    gap: 12px !important;
-    max-width: 620px !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
-    grid-template-columns: minmax(100px, 128px) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
-    grid-template-columns: repeat(2, minmax(100px, 128px)) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
-    grid-template-columns: repeat(3, minmax(95px, 128px)) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, minmax(90px, 128px)) !important;
-  }
-
-  .fullscreen-card {
-    max-width: 128px !important;
-  }
-
-  .fullscreen-section-label {
-    font-size: 0.86rem !important;
-    padding: 6px 16px !important;
-  }
-
-  .fullscreen-label {
-    font-size: 0.68rem !important;
-    padding: 3px 8px !important;
-  }
-
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-    flex-basis: 124px !important;
-    width: 124px !important;
-    max-width: 124px !important;
-  }
-}
-
-
-/* =========================================================
-   최종 팝업형 보기 수정
-   - 기존 기능 유지
-   - 노트북/태블릿/스마트폰 모두 검정 배경 팝업
-   - 전체화면처럼 화면에 강제로 맞추지 않고, 팝업 내부 스크롤 허용
-   ========================================================= */
-
-.fullscreen-view {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100dvh !important;
-  min-height: 100vh !important;
-  background: rgba(15, 13, 24, 0.92) !important;
-  z-index: 9999 !important;
-  display: none !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 18px !important;
-  overflow: hidden !important;
-}
-
-.fullscreen-view.active {
-  display: flex !important;
-}
-
-.fullscreen-content {
-  width: min(960px, calc(100vw - 28px)) !important;
-  max-height: calc(100dvh - 36px) !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  background: transparent !important;
-  border-radius: 24px !important;
-  padding: 8px 8px 14px !important;
-  margin: 0 auto !important;
-}
-
-.fullscreen-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.fullscreen-content::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,.35);
-  border-radius: 999px;
-}
-
-.fullscreen-content::-webkit-scrollbar-track {
-  background: rgba(255,255,255,.08);
-  border-radius: 999px;
-}
-
-.fullscreen-title {
-  font-family: "Jua", "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif !important;
-  color: #ffffff !important;
-  text-align: center !important;
-  font-size: 1.28rem !important;
-  font-weight: 400 !important;
-  margin: 0 0 22px !important;
-  letter-spacing: 0.02em !important;
-  text-shadow: 0 3px 10px rgba(0,0,0,.35) !important;
-}
-
-.fullscreen-section {
-  position: relative !important;
-  width: 100% !important;
-  border-radius: 22px !important;
-  padding: 34px 18px 20px !important;
-  margin: 0 auto 24px !important;
-  overflow: visible !important;
-  border: 2px solid transparent !important;
-}
-
-.fullscreen-section:last-child {
-  margin-bottom: 0 !important;
-}
-
-.fullscreen-section.must-section {
-  background:
-    radial-gradient(circle at center, rgba(255,210,90,.26), rgba(255,210,90,.09) 45%, rgba(255,210,90,0) 76%) !important;
-  border-color: rgba(255,210,90,.72) !important;
-  box-shadow:
-    0 0 28px rgba(255,210,90,.24),
-    inset 0 0 28px rgba(255,210,90,.10) !important;
-}
-
-.fullscreen-section.bonus-section {
-  background:
-    radial-gradient(circle at center, rgba(111,213,255,.20), rgba(111,213,255,.07) 45%, rgba(111,213,255,0) 76%) !important;
-  border-color: rgba(111,213,255,.55) !important;
-  box-shadow:
-    0 0 24px rgba(111,213,255,.18),
-    inset 0 0 24px rgba(111,213,255,.08) !important;
-}
-
-.fullscreen-section-label {
-  position: absolute !important;
-  left: 20px !important;
-  top: -17px !important;
-  z-index: 10 !important;
-  padding: 7px 20px !important;
-  border-radius: 999px !important;
-  font-family: "Jua", "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif !important;
-  font-size: 1rem !important;
-  font-weight: 400 !important;
-  white-space: nowrap !important;
-  box-shadow: 0 8px 18px rgba(0,0,0,.25) !important;
-}
-
-.fullscreen-section-label.must {
-  background: var(--must) !important;
-  color: #5b3a00 !important;
-}
-
-.fullscreen-section-label.bonus {
-  background: var(--bonus) !important;
-  color: #004b68 !important;
-}
-
-.fullscreen-row,
-.fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-.fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-.fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-.fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-  display: grid !important;
-  grid-auto-flow: row !important;
-  grid-auto-columns: unset !important;
-  grid-template-columns: repeat(4, minmax(110px, 165px)) !important;
-  gap: 16px !important;
-  width: 100% !important;
-  max-width: 760px !important;
-  min-height: 0 !important;
-  justify-content: center !important;
-  justify-items: center !important;
-  align-items: center !important;
-  margin: 0 auto !important;
-  padding: 4px 0 6px !important;
-  overflow: visible !important;
-  scroll-snap-type: none !important;
-}
-
-/* 1~3장일 때 가운데 정렬 */
-.fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
-  grid-template-columns: minmax(115px, 165px) !important;
-}
-
-.fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
-  grid-template-columns: repeat(2, minmax(115px, 165px)) !important;
-}
-
-.fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
-  grid-template-columns: repeat(3, minmax(110px, 165px)) !important;
-}
-
-/* 보너스가 5장 이상이면 팝업 안에서만 가로 스크롤 */
-.bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  justify-content: flex-start !important;
-  max-width: 100% !important;
-  overflow-x: auto !important;
-  overflow-y: visible !important;
-  padding: 8px 4px 14px !important;
-  scroll-snap-type: x proximity !important;
-}
-
-.bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-  flex: 0 0 150px !important;
-  width: 150px !important;
-  max-width: 150px !important;
-  scroll-snap-align: center !important;
-}
-
-.bonus-section .fullscreen-row::-webkit-scrollbar {
-  height: 8px !important;
-}
-
-.bonus-section .fullscreen-row::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,.35) !important;
-  border-radius: 999px !important;
-}
-
-.bonus-section .fullscreen-row::-webkit-scrollbar-track {
-  background: rgba(255,255,255,.08) !important;
-  border-radius: 999px !important;
-}
-
-.fullscreen-card {
-  position: relative !important;
-  width: 100% !important;
-  max-width: 165px !important;
-  min-width: 0 !important;
-  aspect-ratio: 3 / 4 !important;
-  border-radius: 14px !important;
-  overflow: visible !important;
-  background: #fff !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-shadow: 0 12px 30px rgba(0,0,0,.35) !important;
-}
-
-.fullscreen-card img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  border-radius: 14px !important;
-  display: block !important;
-  background: #fff !important;
-}
-
-.fullscreen-card.must-card {
-  box-shadow:
-    0 0 0 4px rgba(255,255,255,.96),
-    0 0 0 8px rgba(255,210,90,.84),
-    0 0 30px 10px rgba(255,210,90,.68),
-    0 16px 34px rgba(0,0,0,.45) !important;
-  animation: mustGlow 1.8s ease-in-out infinite alternate !important;
-}
-
-.fullscreen-card.bonus-card {
-  box-shadow:
-    0 0 0 4px rgba(255,255,255,.96),
-    0 0 0 7px rgba(111,213,255,.78),
-    0 0 24px 8px rgba(111,213,255,.52),
-    0 16px 34px rgba(0,0,0,.42) !important;
-}
-
-.fullscreen-label {
-  position: absolute !important;
-  top: 6px !important;
-  right: 6px !important;
-  z-index: 3 !important;
-  padding: 4px 9px !important;
-  border-radius: 999px !important;
-  font-family: "Jua", "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif !important;
-  font-size: .75rem !important;
-  font-weight: 400 !important;
-  box-shadow: 0 4px 10px rgba(0,0,0,.18) !important;
-}
-
-.fullscreen-label.must {
-  background: var(--must) !important;
-  color: #5b3a00 !important;
-}
-
-.fullscreen-label.bonus {
-  background: var(--bonus) !important;
-  color: #004b68 !important;
-}
-
-.close-fullscreen {
-  position: fixed !important;
-  top: 18px !important;
-  right: 22px !important;
-  width: 42px !important;
-  height: 42px !important;
-  padding: 0 !important;
-  z-index: 10001 !important;
-  border-radius: 999px !important;
-  background: #ffffff !important;
-  color: #4d415f !important;
-  border: 2px solid rgba(219,198,255,.9) !important;
-  box-shadow: 0 8px 22px rgba(0,0,0,.25) !important;
-  font-size: 1.7rem !important;
-}
-
-/* 태블릿: 팝업형 유지, 카드 살짝 축소 */
-@media (min-width: 601px) and (max-width: 1180px) {
-  .fullscreen-view {
-    padding: 18px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: min(900px, calc(100vw - 32px)) !important;
-    max-height: calc(100dvh - 36px) !important;
-    padding: 8px 8px 14px !important;
-    overflow-y: auto !important;
-  }
-
-  .fullscreen-title {
-    font-size: 1.14rem !important;
-    margin-bottom: 20px !important;
-  }
-
-  .fullscreen-section {
-    padding: 30px 14px 16px !important;
-    margin-bottom: 20px !important;
-  }
-
-  .fullscreen-section-label {
-    top: -16px !important;
-    left: 18px !important;
-    font-size: .92rem !important;
-    padding: 7px 17px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, minmax(90px, 140px)) !important;
-    gap: 13px !important;
-    max-width: 620px !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
-    grid-template-columns: minmax(100px, 140px) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
-    grid-template-columns: repeat(2, minmax(100px, 140px)) !important;
-  }
-
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
-    grid-template-columns: repeat(3, minmax(95px, 140px)) !important;
-  }
-
-  .fullscreen-card {
-    max-width: 140px !important;
-  }
-
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-    flex-basis: 132px !important;
-    width: 132px !important;
-    max-width: 132px !important;
-  }
-}
-
-/* 스마트폰 세로: 팝업 안에서 2열 */
-@media (max-width: 600px) and (orientation: portrait) {
-  .fullscreen-view {
-    padding: 12px !important;
-    align-items: center !important;
-    overflow: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: calc(100vw - 24px) !important;
-    max-height: calc(100dvh - 24px) !important;
-    overflow-y: auto !important;
-    padding: 8px 6px 12px !important;
-  }
-
-  .fullscreen-title {
-    font-size: 1.05rem !important;
-    margin-bottom: 18px !important;
-  }
-
-  .fullscreen-section {
-    padding: 30px 10px 14px !important;
-    margin-bottom: 20px !important;
-    border-radius: 18px !important;
-  }
-
-  .fullscreen-section-label {
-    left: 14px !important;
-    top: -16px !important;
-    font-size: .88rem !important;
-    padding: 6px 15px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 12px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .fullscreen-card {
-    max-width: 170px !important;
-  }
-
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    overflow-x: hidden !important;
-    padding: 4px 0 6px !important;
-  }
-
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-    flex: unset !important;
-    width: 100% !important;
-    max-width: 170px !important;
-  }
-
-  .fullscreen-label {
-    font-size: .7rem !important;
-    padding: 3px 8px !important;
-  }
-
-  .close-fullscreen {
-    top: 16px !important;
-    right: 16px !important;
-    width: 38px !important;
-    height: 38px !important;
-    font-size: 1.5rem !important;
-  }
-}
-
-/* 스마트폰 가로: 팝업 안에서 한 줄 */
-@media (max-width: 900px) and (max-height: 560px) and (orientation: landscape) {
-  .fullscreen-view {
-    padding: 10px !important;
-    overflow: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: calc(100vw - 20px) !important;
-    max-height: calc(100dvh - 20px) !important;
-    padding: 6px 8px 10px !important;
-    overflow-y: auto !important;
-  }
-
-  .fullscreen-title {
-    font-size: .98rem !important;
-    margin-bottom: 12px !important;
-  }
-
-  .fullscreen-section {
-    padding: 24px 10px 10px !important;
-    margin-bottom: 12px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    overflow-x: auto !important;
-    max-width: 100% !important;
-  }
-
-  .fullscreen-row .fullscreen-card {
-    flex: 0 0 104px !important;
-    width: 104px !important;
-    max-width: 104px !important;
-  }
-
-  .close-fullscreen {
-    top: 14px !important;
-    right: 14px !important;
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 1.45rem !important;
-  }
-}
-
-
-
-/* =========================================================
-   선택 카드 보기 최종 수정
-   - 필수/보너스 구역 분리 없이 선택한 카드만 한 화면에 표시
-   - 필수: 노란 테두리 / 보너스: 파란 테두리
-   - 노트북·태블릿·스마트폰 모두 화면 안에서 잘리지 않게 자동 축소
-   ========================================================= */
-.fullscreen-view {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100dvh !important;
-  background: rgba(15, 13, 24, 0.94) !important;
-  z-index: 9999 !important;
-  display: none !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: clamp(10px, 2vw, 22px) !important;
-  overflow: hidden !important;
-}
-
-.fullscreen-view.active { display: flex !important; }
-
-.fullscreen-content {
-  width: min(1040px, calc(100vw - 24px)) !important;
-  max-height: calc(100dvh - 24px) !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  padding: 8px 8px 16px !important;
-  margin: 0 auto !important;
-}
-
-.fullscreen-title {
-  font-size: clamp(1rem, 2.2vw, 1.35rem) !important;
-  margin: 0 0 clamp(14px, 2.2vh, 22px) !important;
-}
-
-.fullscreen-section.must-section {
-  width: 100% !important;
-  margin: 0 auto !important;
-  padding: clamp(30px, 4vh, 38px) clamp(10px, 2vw, 18px) clamp(14px, 2vh, 20px) !important;
-  border: 2px solid rgba(255,255,255,.35) !important;
-  border-radius: 22px !important;
-  background: rgba(255,255,255,.06) !important;
-  box-shadow: 0 14px 38px rgba(0,0,0,.28) !important;
-  overflow: visible !important;
-}
-
-.fullscreen-section.bonus-section { display: none !important; }
-
-.fullscreen-section-label.must {
-  background: #ffffff !important;
-  color: #4d415f !important;
-  top: -16px !important;
-}
-
-.fullscreen-row,
-.fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-.fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-.fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-.fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)) !important;
-  grid-auto-flow: row !important;
-  gap: clamp(10px, 1.8vw, 18px) !important;
-  width: 100% !important;
-  max-width: 880px !important;
-  margin: 0 auto !important;
-  padding: 4px 0 6px !important;
-  justify-content: center !important;
-  justify-items: center !important;
-  align-items: center !important;
-  overflow: visible !important;
-}
-
-.fullscreen-card {
-  width: 100% !important;
-  max-width: clamp(118px, 16vw, 190px) !important;
-  min-width: 0 !important;
-  aspect-ratio: 3 / 4 !important;
-  border-radius: 16px !important;
-  background: #fff !important;
-  overflow: visible !important;
-}
-
-.fullscreen-card.must-card {
-  box-shadow:
-    0 0 0 4px rgba(255,255,255,.98),
-    0 0 0 9px rgba(255,210,90,.95),
-    0 0 28px 9px rgba(255,210,90,.55),
-    0 14px 30px rgba(0,0,0,.42) !important;
-  animation: none !important;
-}
-
-.fullscreen-card.bonus-card {
-  box-shadow:
-    0 0 0 4px rgba(255,255,255,.98),
-    0 0 0 9px rgba(111,213,255,.95),
-    0 0 28px 9px rgba(111,213,255,.48),
-    0 14px 30px rgba(0,0,0,.42) !important;
-}
-
-.fullscreen-empty-text {
-  grid-column: 1 / -1;
-  color: #fff;
-  font-size: 1.1rem;
-  padding: 36px 0;
-  text-align: center;
-}
-
-@media (min-width: 700px) {
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, minmax(112px, 1fr)) !important;
-  }
-}
-
-@media (max-width: 699px) {
-  .fullscreen-content {
-    width: calc(100vw - 20px) !important;
-    max-height: calc(100dvh - 20px) !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    max-width: 390px !important;
-  }
-
-  .fullscreen-card {
-    max-width: min(42vw, 168px) !important;
-  }
-}
-
-@media (max-height: 760px) and (min-width: 700px) {
-  .fullscreen-card {
-    max-width: clamp(100px, 13vw, 145px) !important;
-  }
-
-  .fullscreen-section.must-section {
-    padding-top: 28px !important;
-    padding-bottom: 12px !important;
-  }
-}
-
-@media (max-height: 520px) and (orientation: landscape) {
-  .fullscreen-content { overflow-y: auto !important; }
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, minmax(84px, 1fr)) !important;
-    gap: 9px !important;
-  }
-  .fullscreen-card { max-width: 104px !important; }
-}
-
-
-
-/* =========================================================
-   추가 보정 2차
-   - 스마트폰: 이전처럼 2열 카드가 잘 보이게 확대 + 라벨 작게
-   - 태블릿: 카드 크기 조금 더 확대
-   ========================================================= */
-
-/* 태블릿: 선택 카드가 더 크게 보이도록 */
-@media (min-width: 700px) and (max-width: 1180px) and (min-height: 761px) {
-  .fullscreen-content {
-    width: min(1120px, calc(100vw - 24px)) !important;
-    max-height: calc(100dvh - 24px) !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, minmax(145px, 1fr)) !important;
-    max-width: 920px !important;
-    gap: 22px !important;
-  }
-
-  .fullscreen-card {
-    max-width: clamp(170px, 20vw, 230px) !important;
-  }
-}
-
-/* 태블릿 가로/낮은 화면: 잘리지 않는 선에서 기존보다 약간 확대 */
-@media (min-width: 700px) and (max-width: 1180px) and (max-height: 760px) {
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, minmax(120px, 1fr)) !important;
-    max-width: 760px !important;
-    gap: 16px !important;
-  }
-
-  .fullscreen-card {
-    max-width: clamp(132px, 16vw, 170px) !important;
-  }
-}
-
-/* 스마트폰: 이전 느낌처럼 카드가 답답하게 작아지지 않도록 */
-@media (max-width: 699px) and (orientation: portrait) {
-  .fullscreen-view {
-    align-items: center !important;
-    padding: 10px !important;
-  }
-
-  .fullscreen-content {
-    width: calc(100vw - 20px) !important;
-    max-height: calc(100dvh - 20px) !important;
-    overflow-y: auto !important;
-  }
-
-  .fullscreen-section.must-section {
-    padding: 34px 12px 18px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    max-width: 430px !important;
-    gap: 14px !important;
-  }
-
-  .fullscreen-card {
-    max-width: min(43vw, 182px) !important;
-  }
-
-  .fullscreen-label {
-    top: 5px !important;
-    right: 5px !important;
-    font-size: .62rem !important;
-    padding: 3px 7px !important;
-    writing-mode: horizontal-tb !important;
-    line-height: 1 !important;
-  }
-}
-
-
-
-/* =========================================================
-   퇴근 전 최종 보정
-   1) 스마트폰: 카드 개수와 상관없이 항상 2열, 카드 크게 표시
-   2) 태블릿: 카드 크게, 한 줄 유지, 넘치면 가로 스크롤
-   3) 선택 카드: 필수 노랑 / 보너스 파랑 테두리 유지
-   ========================================================= */
-
-/* 공통: 선택 카드 팝업은 한 섹션 안에서 보기 */
-.fullscreen-content {
-  width: min(1120px, calc(100vw - 24px)) !important;
-}
-
-.fullscreen-section.must-section {
-  max-width: 100% !important;
-}
-
-.fullscreen-card.must-card {
-  box-shadow:
-    0 0 0 5px rgba(255,255,255,.98),
-    0 0 0 10px rgba(255,210,90,.9),
-    0 0 34px 12px rgba(255,210,90,.66),
-    0 16px 34px rgba(0,0,0,.45) !important;
-}
-
-.fullscreen-card.bonus-card {
-  box-shadow:
-    0 0 0 5px rgba(255,255,255,.98),
-    0 0 0 10px rgba(111,213,255,.86),
-    0 0 30px 10px rgba(111,213,255,.58),
-    0 16px 34px rgba(0,0,0,.42) !important;
-}
-
-/* 스마트폰 세로: 4개여도 작아지지 않게 무조건 2열 */
-@media (max-width: 600px) and (orientation: portrait) {
-  .fullscreen-view {
-    padding: 10px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: calc(100vw - 20px) !important;
-    max-height: calc(100dvh - 20px) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    padding: 8px 6px 12px !important;
-  }
-
-  .fullscreen-title {
-    font-size: 1.08rem !important;
-    margin: 0 0 18px !important;
-  }
-
-  .fullscreen-section {
-    padding: 30px 10px 16px !important;
-    margin-bottom: 18px !important;
-    border-radius: 18px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    grid-auto-flow: row !important;
-    gap: 14px 12px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    justify-content: center !important;
-    justify-items: center !important;
-    align-items: start !important;
-    overflow: visible !important;
-    padding: 8px 4px 10px !important;
-  }
-
-  .fullscreen-row .fullscreen-card,
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-    width: min(38vw, 158px) !important;
-    max-width: 158px !important;
-    min-width: 0 !important;
-    flex: unset !important;
-  }
-
-  .fullscreen-label {
-    font-size: .68rem !important;
-    padding: 3px 8px !important;
-    top: 6px !important;
-    right: 6px !important;
-    writing-mode: horizontal-tb !important;
-    text-orientation: mixed !important;
-  }
-
-  .close-fullscreen {
-    top: 14px !important;
-    right: 14px !important;
-    width: 38px !important;
-    height: 38px !important;
-    font-size: 1.5rem !important;
-  }
-}
-
-/* 스마트폰 가로: 카드 작아지지 않게 한 줄 스크롤 */
-@media (max-width: 900px) and (max-height: 560px) and (orientation: landscape) {
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 14px !important;
-    max-width: 100% !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    padding: 10px 8px 16px !important;
-  }
-
-  .fullscreen-row .fullscreen-card {
-    flex: 0 0 128px !important;
-    width: 128px !important;
-    max-width: 128px !important;
-  }
-}
-
-/* 태블릿: 카드 크게 + 무조건 한 줄 + 가로 스크롤 */
-@media (min-width: 601px) and (max-width: 1180px) and (min-height: 561px) {
-  .fullscreen-view {
-    padding: 18px 22px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: calc(100vw - 44px) !important;
-    max-width: none !important;
-    max-height: calc(100dvh - 36px) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    padding: 8px 8px 16px !important;
-  }
-
-  .fullscreen-title {
-    font-size: 1.24rem !important;
-    margin-bottom: 20px !important;
-  }
-
-  .fullscreen-section {
-    padding: 34px 20px 22px !important;
-    margin-bottom: 22px !important;
-    border-radius: 22px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 18px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    padding: 12px 10px 20px !important;
-    scroll-snap-type: x proximity !important;
-  }
-
-  .fullscreen-row .fullscreen-card,
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-    flex: 0 0 clamp(170px, 18vw, 230px) !important;
-    width: clamp(170px, 18vw, 230px) !important;
-    max-width: 230px !important;
-    min-width: 170px !important;
-    scroll-snap-align: center !important;
-  }
-
-  .fullscreen-label {
-    font-size: .82rem !important;
-    padding: 5px 11px !important;
-  }
-}
-
-/* 태블릿 가로처럼 높이가 낮은 경우: 그래도 한 줄, 조금만 압축 */
-@media (min-width: 901px) and (max-height: 760px) and (orientation: landscape) {
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    gap: 18px !important;
-    max-width: 100% !important;
-    overflow-x: auto !important;
-  }
-
-  .fullscreen-row .fullscreen-card {
-    flex: 0 0 clamp(155px, 13vw, 205px) !important;
-    width: clamp(155px, 13vw, 205px) !important;
-    max-width: 205px !important;
-  }
-}
-
-
-
-/* =========================================================
-   2026-06-15 긴급 최종 보정
-   - 스마트폰: 카드 개수와 상관없이 같은 크기 2열, 1장도 과하게 확대 금지
-   - 스마트폰: 선택 카드가 많으면 팝업 내부에서 세로 스크롤
-   - 태블릿: 카드 기존 대비 크게, 무조건 한 줄 + 가로 스크롤
-   ========================================================= */
-
-/* 공통 팝업 스크롤 안정화 */
-.fullscreen-view.active {
-  display: flex !important;
-}
-
-.fullscreen-view {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100dvh !important;
-  background: rgba(15, 13, 24, 0.94) !important;
-  z-index: 9999 !important;
-  overflow: hidden !important;
-}
-
-.fullscreen-content {
-  box-sizing: border-box !important;
-}
-
-.fullscreen-section.must-section {
-  box-sizing: border-box !important;
-}
-
-.fullscreen-card,
-.fullscreen-card img {
-  aspect-ratio: 3 / 4 !important;
-}
-
-.fullscreen-label {
-  writing-mode: horizontal-tb !important;
-  text-orientation: mixed !important;
-  white-space: nowrap !important;
-  line-height: 1 !important;
-}
-
-/* 스마트폰 세로: 무조건 2열, 카드 수별 특수 확대/축소 전부 무시 */
-@media (max-width: 600px) and (orientation: portrait) {
-  .fullscreen-view {
-    align-items: flex-start !important;
-    justify-content: center !important;
-    padding: calc(env(safe-area-inset-top, 0px) + 64px) 10px 12px !important;
-    overflow: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: calc(100vw - 20px) !important;
-    max-width: calc(100vw - 20px) !important;
-    max-height: calc(100dvh - 76px - env(safe-area-inset-top, 0px)) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    padding: 0 6px 14px !important;
-    margin: 0 auto !important;
-  }
-
-  .fullscreen-title {
-    font-size: 1.12rem !important;
-    margin: 0 0 16px !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 5 !important;
-  }
-
-  .fullscreen-section.must-section {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 30px 10px 16px !important;
-    margin: 0 auto 14px !important;
-    border-radius: 18px !important;
-    overflow: visible !important;
-  }
-
-  .fullscreen-section-label.must {
-    left: 14px !important;
-    top: -17px !important;
-    font-size: .92rem !important;
-    padding: 7px 17px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    grid-auto-flow: row !important;
-    gap: 14px 12px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 0 !important;
-    justify-content: center !important;
-    justify-items: center !important;
-    align-items: start !important;
-    overflow: visible !important;
-    padding: 8px 2px 10px !important;
-    margin: 0 auto !important;
-    scroll-snap-type: none !important;
-  }
-
-  .fullscreen-row .fullscreen-card,
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-    width: min(39vw, 154px) !important;
-    max-width: min(39vw, 154px) !important;
-    min-width: 0 !important;
-    flex: none !important;
-    transform: none !important;
-  }
-
-  .fullscreen-card.must-card {
-    box-shadow:
-      0 0 0 4px rgba(255,255,255,.98),
-      0 0 0 9px rgba(255,210,90,.92),
-      0 0 24px 8px rgba(255,210,90,.56),
-      0 12px 26px rgba(0,0,0,.42) !important;
-  }
-
-  .fullscreen-card.bonus-card {
-    box-shadow:
-      0 0 0 4px rgba(255,255,255,.98),
-      0 0 0 9px rgba(111,213,255,.9),
-      0 0 24px 8px rgba(111,213,255,.52),
-      0 12px 26px rgba(0,0,0,.42) !important;
-  }
-
-  .fullscreen-label {
-    top: 6px !important;
-    right: 6px !important;
-    font-size: .68rem !important;
-    padding: 4px 8px !important;
-  }
-
-  .close-fullscreen {
-    top: calc(env(safe-area-inset-top, 0px) + 12px) !important;
-    right: 14px !important;
-    width: 42px !important;
-    height: 42px !important;
-    font-size: 1.6rem !important;
-    z-index: 10001 !important;
-  }
-}
-
-/* 스마트폰 가로: 한 줄 스크롤, 세로 찌그러짐 방지 */
-@media (max-width: 900px) and (max-height: 560px) and (orientation: landscape) {
-  .fullscreen-view {
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 10px !important;
-  }
-
-  .fullscreen-content {
-    width: calc(100vw - 20px) !important;
-    max-height: calc(100dvh - 20px) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 14px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    padding: 10px 8px 16px !important;
-  }
-
-  .fullscreen-row .fullscreen-card {
-    flex: 0 0 132px !important;
-    width: 132px !important;
-    max-width: 132px !important;
-    min-width: 132px !important;
-  }
-}
-
-/* 태블릿: 카드 1.5배 느낌으로 확대 + 전체화면 안에서 한 줄 가로 스크롤 */
-@media (min-width: 601px) and (max-width: 1180px) and (min-height: 561px) {
-  .fullscreen-view {
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 18px 20px !important;
-    overflow: hidden !important;
-  }
-
-  .fullscreen-content {
-    width: calc(100vw - 40px) !important;
-    max-width: none !important;
-    max-height: calc(100dvh - 36px) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    padding: 8px 8px 16px !important;
-    margin: 0 auto !important;
-  }
-
-  .fullscreen-title {
-    font-size: 1.28rem !important;
-    margin: 0 0 20px !important;
-  }
-
-  .fullscreen-section.must-section {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 36px 22px 24px !important;
-    margin: 0 auto !important;
-    border-radius: 24px !important;
-    overflow: hidden !important;
-  }
-
-  .fullscreen-section-label.must {
-    left: 22px !important;
-    top: -17px !important;
-    font-size: 1rem !important;
-    padding: 8px 22px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 24px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 0 !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    padding: 16px 14px 28px !important;
-    margin: 0 auto !important;
-    scroll-snap-type: x proximity !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  .fullscreen-row .fullscreen-card,
-  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-    flex: 0 0 clamp(255px, 30vw, 330px) !important;
-    width: clamp(255px, 30vw, 330px) !important;
-    max-width: 330px !important;
-    min-width: 255px !important;
-    scroll-snap-align: center !important;
-  }
-
-  .fullscreen-label {
-    font-size: .92rem !important;
-    padding: 6px 13px !important;
-    top: 8px !important;
-    right: 8px !important;
-  }
-
-  .close-fullscreen {
-    top: 16px !important;
-    right: 18px !important;
-    width: 44px !important;
-    height: 44px !important;
-    font-size: 1.75rem !important;
-  }
-}
-
-/* 태블릿 가로처럼 높이가 낮은 화면도 한 줄 스크롤 유지 */
-@media (min-width: 601px) and (max-width: 1180px) and (max-height: 760px) and (orientation: landscape) {
-  .fullscreen-section.must-section {
-    padding: 28px 18px 18px !important;
-  }
-
-  .fullscreen-row,
-  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
-  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    gap: 22px !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    padding: 14px 12px 24px !important;
-  }
-
-  .fullscreen-row .fullscreen-card {
-    flex: 0 0 clamp(230px, 23vw, 290px) !important;
-    width: clamp(230px, 23vw, 290px) !important;
-    max-width: 290px !important;
-    min-width: 230px !important;
-  }
-}
-
-</style>
+  </style>
 </head>
 <body>
   <div class="app">
@@ -2754,6 +597,7 @@
     </header>
 
     <div class="layout">
+      <!-- 카드 선택 패널 -->
       <section class="panel">
         <div class="cards-header">
           <div class="section-title">
@@ -2769,6 +613,7 @@
         <div class="cards-grid" id="cardsGrid"></div>
       </section>
 
+      <!-- 점수 패널 -->
       <section class="panel score-panel">
         <div class="score-inner">
           <div class="section-title">
@@ -2785,7 +630,6 @@
 
             <div class="actions">
               <button class="btn-ghost" id="clearBtn">🗑 전체 선택 해제</button>
-              <button class="btn-sub" id="fullscreenBtn">선택 카드 팝업 보기</button>
               <button class="btn-ghost" id="backBtn">⬅ 이전 문제로 돌아가기</button>
             </div>
           </div>
@@ -2793,36 +637,30 @@
           <div id="msg" class="warning" style="display:none;"></div>
         </div>
       </section>
-    </div>
-  </div>
 
-  <div class="fullscreen-view" id="fullscreenView">
-    <button class="close-fullscreen" id="closeFullscreenBtn">×</button>
-    <div class="fullscreen-content">
-      <div class="fullscreen-title">문제 <span id="fullscreenStep">1</span> / 8</div>
-
-      <div class="fullscreen-section must-section" id="mustSection">
-        <div class="fullscreen-section-label must" id="mustSectionLabel">⭐ 필수 카드</div>
-        <div class="fullscreen-row" id="fullscreenMustGrid"></div>
-      </div>
-
-      <div class="fullscreen-section bonus-section" id="bonusSection">
-        <div class="fullscreen-section-label bonus" id="bonusSectionLabel">🎁 보너스 카드</div>
-        <div class="fullscreen-row" id="fullscreenBonusGrid"></div>
-      </div>
+      <!-- 선택 카드 인라인 섹션 (카드 선택 시 자동으로 표시) -->
+      <section class="selected-cards-section hidden" id="selectedCardsSection">
+        <div class="selected-cards-inner">
+          <div class="selected-cards-title">✨ 문제 <span id="selectedStep">1</span> / 8 · 선택 카드</div>
+          <div class="selected-section-box">
+            <div class="selected-section-label" id="selectedSectionLabel">선택 카드</div>
+            <div class="selected-cards-grid" id="selectedCardsGrid"></div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 
   <script>
     const cards = [
-      { name: "극성 증가", image: "+OH.png" },
-      { name: "산성 제거", image: "-COOH.png" },
-      { name: "안정화", image: "+Ac.png" },
+      { name: "극성 증가",     image: "+OH.png" },
+      { name: "산성 제거",     image: "-COOH.png" },
+      { name: "안정화",        image: "+Ac.png" },
       { name: "혈중농도 안정", image: "+SR.png" },
-      { name: "지용성 증가", image: "+R.png" },
+      { name: "지용성 증가",   image: "+R.png" },
       { name: "중추작용 강화", image: "+NH.png" },
-      { name: "장용 코팅", image: "+Block.png" },
-      { name: "독성 완화", image: "+Safe.png" }
+      { name: "장용 코팅",     image: "+Block.png" },
+      { name: "독성 완화",     image: "+Safe.png" }
     ];
 
     const MAX_MUST = 4;
@@ -2848,20 +686,15 @@
     const msg = document.getElementById("msg");
     const clearBtn = document.getElementById("clearBtn");
 
-    const fullscreenBtn = document.getElementById("fullscreenBtn");
-    const fullscreenView = document.getElementById("fullscreenView");
-    const fullscreenMustGrid = document.getElementById("fullscreenMustGrid");
-    const fullscreenBonusGrid = document.getElementById("fullscreenBonusGrid");
-    const fullscreenStep = document.getElementById("fullscreenStep");
-    const mustSection = document.getElementById("mustSection");
-    const bonusSection = document.getElementById("bonusSection");
-    const mustSectionLabel = document.getElementById("mustSectionLabel");
-    const closeFullscreenBtn = document.getElementById("closeFullscreenBtn");
+    const selectedCardsSection = document.getElementById("selectedCardsSection");
+    const selectedCardsGrid = document.getElementById("selectedCardsGrid");
+    const selectedStep = document.getElementById("selectedStep");
+    const selectedSectionLabel = document.getElementById("selectedSectionLabel");
 
     totalStepsSpan.textContent = TOTAL_STEPS.toString();
 
     function getCardData(name) {
-      return cards.find((card) => card.name === name);
+      return cards.find((c) => c.name === name);
     }
 
     function renderCards() {
@@ -2895,8 +728,7 @@
     }
 
     function updateCardVisuals() {
-      const cardEls = document.querySelectorAll(".card");
-      cardEls.forEach((el) => {
+      document.querySelectorAll(".card").forEach((el) => {
         const name = el.dataset.cardName;
         const badge = el.querySelector(".card-badge");
         el.classList.remove("selected-must", "selected-bonus");
@@ -2913,6 +745,67 @@
       });
     }
 
+    function renderSelectedCards() {
+      selectedCardsGrid.innerHTML = "";
+      selectedStep.textContent = currentStep.toString();
+
+      const allSelected = [
+        ...mustSelected.map((n) => ({ name: n, type: "must" })),
+        ...bonusSelected.map((n) => ({ name: n, type: "bonus" })),
+      ];
+
+      const total = allSelected.length;
+
+      if (total === 0) {
+        selectedCardsSection.classList.add("hidden");
+        return;
+      }
+
+      // 섹션 표시
+      selectedCardsSection.classList.remove("hidden");
+
+      // 라벨
+      const mustCount = mustSelected.length;
+      const bonusCount = bonusSelected.length;
+      if (mustCount > 0 && bonusCount > 0) {
+        selectedSectionLabel.textContent = `⭐ 필수 ${mustCount}장  +  🎁 보너스 ${bonusCount}장`;
+      } else if (mustCount > 0) {
+        selectedSectionLabel.textContent = `⭐ 필수 카드 ${mustCount}장`;
+      } else {
+        selectedSectionLabel.textContent = `🎁 보너스 카드 ${bonusCount}장`;
+      }
+
+      // data-count 설정 (1~4열 제어)
+      const countAttr = Math.min(total, 4);
+      selectedCardsGrid.setAttribute("data-count", countAttr.toString());
+
+      allSelected.forEach(({ name, type }) => {
+        const cardData = getCardData(name);
+        if (!cardData) return;
+
+        const item = document.createElement("div");
+        item.className = "selected-card-item " + (type === "must" ? "must-card" : "bonus-card");
+
+        const img = document.createElement("img");
+        img.src = cardData.image;
+        img.alt = cardData.name;
+        img.draggable = false;
+        item.appendChild(img);
+
+        const label = document.createElement("div");
+        label.className = "selected-card-label " + type;
+        label.textContent = type === "must" ? "필수" : "보너스";
+        item.appendChild(label);
+
+        selectedCardsGrid.appendChild(item);
+      });
+
+      // 부드럽게 스크롤
+      setTimeout(() => {
+        selectedCardsSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 60);
+    }
+
     function onCardClick(name) {
       msg.style.display = "none";
 
@@ -2925,9 +818,9 @@
         } else {
           if (mustSelected.length >= MAX_MUST) {
             alert("필수 카드는 최대 4장까지 선택할 수 있습니다.");
-          } else {
-            mustSelected.push(name);
+            return;
           }
+          mustSelected.push(name);
         }
         bonusSelected = bonusSelected.filter((n) => n !== name);
       } else {
@@ -2946,6 +839,7 @@
       currentStepSpan.textContent = currentStep.toString();
       totalScoreSpan.textContent = totalScore.toString();
       updateCardVisuals();
+      renderSelectedCards();
 
       if (isFinished) {
         applyScoreBtn.disabled = true;
@@ -3026,11 +920,8 @@
 
       msg.style.display = "none";
 
-      // 마지막으로 반영했던 문제 상태로 정확히 복원
       currentStep = lastStepSnapshot.step;
       isFinished = lastStepSnapshot.finishedBefore || false;
-
-      // 누적 점수에서 직전에 반영했던 점수 제거
       totalScore -= lastStepSnapshot.score;
       if (totalScore < 0) totalScore = 0;
 
@@ -3038,9 +929,7 @@
       bonusSelected = [...lastStepSnapshot.bonus];
       scoreInput.value = String(lastStepSnapshot.score);
 
-      // 같은 스냅샷을 여러 번 눌러 점수가 계속 빠지는 문제 방지
       lastStepSnapshot = null;
-
       syncUI();
     });
 
@@ -3051,87 +940,12 @@
         return;
       }
 
-      if (!confirm("선택한 필수 카드와 보너스 카드를 모두 해제하시겠습니까?")) {
-        return;
-      }
+      if (!confirm("선택한 필수 카드와 보너스 카드를 모두 해제하시겠습니까?")) return;
 
       mustSelected = [];
       bonusSelected = [];
       msg.style.display = "none";
       syncUI();
-    });
-
-    function createFullscreenCard(cardData, type) {
-      const card = document.createElement("div");
-      card.className = "fullscreen-card " + (type === "must" ? "must-card" : "bonus-card");
-
-      const img = document.createElement("img");
-      img.src = cardData.image;
-      img.alt = cardData.name;
-      img.draggable = false;
-      card.appendChild(img);
-
-      const label = document.createElement("div");
-      label.className = "fullscreen-label " + type;
-      label.textContent = type === "must" ? "필수" : "보너스";
-      card.appendChild(label);
-
-      return card;
-    }
-
-    function createEmptyFullscreenCard() {
-      const card = document.createElement("div");
-      card.className = "fullscreen-card empty";
-      return card;
-    }
-
-    function renderFullscreenCards() {
-      fullscreenMustGrid.innerHTML = "";
-      fullscreenBonusGrid.innerHTML = "";
-      fullscreenStep.textContent = currentStep.toString();
-
-      const selectedCards = [
-        ...mustSelected.map((name) => ({ name, type: "must" })),
-        ...bonusSelected.map((name) => ({ name, type: "bonus" }))
-      ];
-
-      mustSection.style.display = "block";
-      bonusSection.style.display = "none";
-      mustSectionLabel.textContent = "✨ 선택 카드";
-
-      if (!selectedCards.length) {
-        const emptyText = document.createElement("div");
-        emptyText.className = "fullscreen-empty-text";
-        emptyText.textContent = "선택된 카드가 없습니다.";
-        fullscreenMustGrid.appendChild(emptyText);
-        return;
-      }
-
-      selectedCards.forEach(({ name, type }) => {
-        const cardData = getCardData(name);
-        if (cardData) fullscreenMustGrid.appendChild(createFullscreenCard(cardData, type));
-      });
-    }
-
-    fullscreenBtn.addEventListener("click", () => {
-      renderFullscreenCards();
-      fullscreenView.classList.add("active");
-    });
-
-    closeFullscreenBtn.addEventListener("click", () => {
-      fullscreenView.classList.remove("active");
-    });
-
-    fullscreenView.addEventListener("click", (e) => {
-      if (e.target === fullscreenView) {
-        fullscreenView.classList.remove("active");
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        fullscreenView.classList.remove("active");
-      }
     });
 
     renderCards();
