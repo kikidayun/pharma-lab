@@ -1041,6 +1041,161 @@
       }
     }
 
+  
+    /* ✅ 모바일/태블릿 전체화면 최종 고정
+       - 세로 화면: 카드가 화면 안에서 잘리지 않도록 자동 축소
+       - 가로 화면: 화면 높이에 맞춰 자동 축소
+       - 기존 가로 스크롤 설정을 강하게 덮어씀
+    */
+    @media (max-width: 768px) {
+      .fullscreen-view {
+        padding: 52px 10px 18px !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+      }
+
+      .fullscreen-content {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .fullscreen-title {
+        font-size: 1.15rem !important;
+        margin-bottom: 18px !important;
+      }
+
+      .fullscreen-section {
+        width: 100% !important;
+        padding: 30px 8px 14px !important;
+        margin-bottom: 22px !important;
+        border-radius: 16px !important;
+        overflow: visible !important;
+      }
+
+      .fullscreen-section-label {
+        left: 14px !important;
+        top: -18px !important;
+        font-size: 0.92rem !important;
+        padding: 7px 17px !important;
+      }
+
+      .fullscreen-row {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+        padding: 6px 0 8px !important;
+        scroll-snap-type: none !important;
+      }
+
+      .fullscreen-row .fullscreen-card {
+        flex: 0 1 calc((100% - 24px) / 4) !important;
+        width: calc((100% - 24px) / 4) !important;
+        min-width: 0 !important;
+        max-width: 118px !important;
+        scroll-snap-align: unset !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) .fullscreen-card {
+        flex-basis: min(56vw, 180px) !important;
+        width: min(56vw, 180px) !important;
+        max-width: 180px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) .fullscreen-card {
+        flex-basis: min(40vw, 150px) !important;
+        width: min(40vw, 150px) !important;
+        max-width: 150px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) .fullscreen-card {
+        flex-basis: min(29vw, 130px) !important;
+        width: min(29vw, 130px) !important;
+        max-width: 130px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) .fullscreen-card {
+        flex-basis: calc((100% - 24px) / 4) !important;
+        width: calc((100% - 24px) / 4) !important;
+        max-width: 118px !important;
+      }
+
+      .fullscreen-label {
+        font-size: 0.68rem !important;
+        padding: 3px 7px !important;
+        top: 5px !important;
+        right: 5px !important;
+      }
+
+      .close-fullscreen {
+        top: 10px !important;
+        right: 10px !important;
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 1.7rem !important;
+        z-index: 1001 !important;
+      }
+    }
+
+    @media (max-width: 768px) and (orientation: landscape) {
+      .fullscreen-view {
+        padding: 38px 10px 12px !important;
+      }
+
+      .fullscreen-title {
+        font-size: 1rem !important;
+        margin-bottom: 14px !important;
+      }
+
+      .fullscreen-section {
+        padding: 24px 8px 12px !important;
+        margin-bottom: 14px !important;
+      }
+
+      .fullscreen-row {
+        gap: 7px !important;
+      }
+
+      .fullscreen-row .fullscreen-card {
+        flex: 0 1 min(14vw, 118px) !important;
+        width: min(14vw, 118px) !important;
+        max-width: 118px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) .fullscreen-card {
+        flex-basis: min(22vw, 145px) !important;
+        width: min(22vw, 145px) !important;
+        max-width: 145px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) .fullscreen-card {
+        flex-basis: min(18vw, 130px) !important;
+        width: min(18vw, 130px) !important;
+        max-width: 130px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) .fullscreen-card {
+        flex-basis: min(15vw, 122px) !important;
+        width: min(15vw, 122px) !important;
+        max-width: 122px !important;
+      }
+
+      .close-fullscreen {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 1.55rem !important;
+      }
+    }
+
   </style>
 </head>
 <body>
