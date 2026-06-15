@@ -2120,6 +2120,94 @@
   .fullscreen-card { max-width: 104px !important; }
 }
 
+
+
+/* =========================================================
+   추가 보정 2차
+   - 스마트폰: 이전처럼 2열 카드가 잘 보이게 확대 + 라벨 작게
+   - 태블릿: 카드 크기 조금 더 확대
+   ========================================================= */
+
+/* 태블릿: 선택 카드가 더 크게 보이도록 */
+@media (min-width: 700px) and (max-width: 1180px) and (min-height: 761px) {
+  .fullscreen-content {
+    width: min(1120px, calc(100vw - 24px)) !important;
+    max-height: calc(100dvh - 24px) !important;
+  }
+
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(145px, 1fr)) !important;
+    max-width: 920px !important;
+    gap: 22px !important;
+  }
+
+  .fullscreen-card {
+    max-width: clamp(170px, 20vw, 230px) !important;
+  }
+}
+
+/* 태블릿 가로/낮은 화면: 잘리지 않는 선에서 기존보다 약간 확대 */
+@media (min-width: 700px) and (max-width: 1180px) and (max-height: 760px) {
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(120px, 1fr)) !important;
+    max-width: 760px !important;
+    gap: 16px !important;
+  }
+
+  .fullscreen-card {
+    max-width: clamp(132px, 16vw, 170px) !important;
+  }
+}
+
+/* 스마트폰: 이전 느낌처럼 카드가 답답하게 작아지지 않도록 */
+@media (max-width: 699px) and (orientation: portrait) {
+  .fullscreen-view {
+    align-items: center !important;
+    padding: 10px !important;
+  }
+
+  .fullscreen-content {
+    width: calc(100vw - 20px) !important;
+    max-height: calc(100dvh - 20px) !important;
+    overflow-y: auto !important;
+  }
+
+  .fullscreen-section.must-section {
+    padding: 34px 12px 18px !important;
+  }
+
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    max-width: 430px !important;
+    gap: 14px !important;
+  }
+
+  .fullscreen-card {
+    max-width: min(43vw, 182px) !important;
+  }
+
+  .fullscreen-label {
+    top: 5px !important;
+    right: 5px !important;
+    font-size: .62rem !important;
+    padding: 3px 7px !important;
+    writing-mode: horizontal-tb !important;
+    line-height: 1 !important;
+  }
+}
+
 </style>
 </head>
 <body>
