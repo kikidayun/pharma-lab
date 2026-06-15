@@ -47,19 +47,6 @@
       box-shadow: 0 18px 45px rgba(60, 30, 100, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.7);
       padding: 16px 18px;
       backdrop-filter: blur(8px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .app::before {
-      content: "✦  ✧  ✦";
-      position: absolute;
-      right: 24px;
-      bottom: 18px;
-      color: rgba(123, 75, 218, .12);
-      font-size: 3rem;
-      font-weight: 900;
-      pointer-events: none;
     }
 
     header {
@@ -74,16 +61,12 @@
     }
 
     header h1 {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
-      font-size: 1.55rem;
-      font-weight: 400;
+      font-size: 1.4rem;
       margin: 0;
       display: flex;
       align-items: center;
       gap: 8px;
       color: var(--primary);
-      letter-spacing: 0.01em;
-      text-shadow: 0 2px 0 rgba(255,255,255,.9);
     }
 
     header h1::before {
@@ -100,13 +83,11 @@
     }
 
     .badge {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       padding: 6px 10px;
       border-radius: 99px;
       background: var(--primary-soft);
       color: var(--primary);
-      font-weight: 400;
-      box-shadow: inset 0 -2px 0 rgba(255,255,255,.55), 0 4px 10px rgba(123,75,218,.12);
+      font-weight: 600;
     }
 
     .badge.score {
@@ -126,33 +107,34 @@
       gap: 12px;
     }
 
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
     .panel {
       background: var(--bg-panel);
       border-radius: 14px;
       padding: 10px 12px;
       box-shadow: 0 10px 20px rgba(80, 40, 150, 0.06);
-      border: 1px solid rgba(219, 198, 255, .85);
+      border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
     .section-title {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
-      font-weight: 400;
+      font-weight: 700;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 6px;
       color: var(--primary);
-      font-size: 1.05rem;
-      letter-spacing: 0.01em;
+      font-size: 0.95rem;
     }
 
     .section-title .emoji { font-size: 1.1rem; }
 
     .helper-text {
-      font-size: 0.86rem;
+      font-size: 0.8rem;
       color: #777;
       margin-top: 2px;
-      line-height: 1.5;
     }
 
     .cards-header {
@@ -166,16 +148,20 @@
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
+      gap: 8px;
       margin-top: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     .card {
       position: relative;
       aspect-ratio: 3 / 4;
-      border-radius: 18px;
+      border-radius: 12px;
       padding: 8px;
-      background: linear-gradient(180deg, #ffffff, #fff9fd);
+      background: radial-gradient(circle at top, #fff8e7, var(--bg-card));
       border: 1px solid var(--card-border);
       box-shadow: 0 4px 10px rgba(80, 40, 150, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.9);
       display: flex;
@@ -204,22 +190,19 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      filter: saturate(1.05);
     }
 
     .card-badge {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       position: absolute;
       top: 4px;
       right: 4px;
-      font-size: .75rem;
-      padding: 4px 10px;
+      font-size: 0.7rem;
+      padding: 2px 8px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.9);
       color: #666;
       z-index: 2;
       box-shadow: 0 2px 6px rgba(0,0,0,.08);
-      font-weight: 400;
     }
 
     .card.selected-must {
@@ -237,11 +220,13 @@
     .card.selected-must .card-badge {
       background: var(--must);
       color: #5b3a00;
+      font-weight: 800;
     }
 
     .card.selected-bonus .card-badge {
       background: var(--bonus);
       color: #004b68;
+      font-weight: 800;
     }
 
     .mode-toggle {
@@ -253,12 +238,11 @@
     }
 
     .mode-btn {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       padding: 4px 12px;
       border: none;
       background: transparent;
       cursor: pointer;
-      font-weight: 400;
+      font-weight: 700;
       color: #666;
     }
 
@@ -268,13 +252,12 @@
     }
 
     button {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       border: none;
       border-radius: 999px;
       padding: 8px 14px;
       font-size: 0.9rem;
       cursor: pointer;
-      font-weight: 400;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -297,85 +280,49 @@
     }
 
     .btn-main {
-      background: linear-gradient(135deg, #8d5cff, #d467ff);
+      background: linear-gradient(135deg, #7b4bda, #c173ff);
       color: white;
-      box-shadow: 0 7px 14px rgba(141, 92, 255, .28);
+      box-shadow: 0 6px 12px rgba(123, 75, 218, 0.35);
     }
 
-    .btn-sub, .btn-ghost {
-      background: rgba(255,255,255,.82);
-      border: 2px solid rgba(219, 198, 255, .8);
-      color: #5d5170;
+    .btn-sub {
+      background: #ffffff;
+      color: #555;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(230, 230, 255, 0.9);
     }
 
     .btn-ghost {
-      border-style: dashed;
+      background: transparent;
+      color: #555;
+      border: 1px dashed rgba(120, 120, 160, 0.5);
+      box-shadow: none;
     }
 
     .score-panel {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(250,243,255,.92));
-    }
-
-    .score-inner {
-      width: 100%;
       display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .score-controls {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .score-inner .section-title {
-      margin-bottom: 0;
-    }
-
-    .score-row,
-    .actions {
-      margin-top: 0;
-      padding-left: 0;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+      align-self: start;
     }
 
     .score-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+      margin-top: 8px;
       font-size: 0.9rem;
-      white-space: nowrap;
-    }
-
-    .actions {
-      justify-content: flex-end;
-    }
-
-    .actions button {
-      min-width: 160px;
     }
 
     .score-row input[type="number"] {
       width: 78px;
       padding: 7px 8px;
       border-radius: 999px;
-      border: 2px solid rgba(193, 160, 255, .55);
-      background: #fff;
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
-      font-size: 1rem;
+      border: 1px solid rgba(123, 75, 218, 0.4);
+      font-size: 0.9rem;
       text-align: center;
       outline: none;
-      box-shadow: inset 0 2px 5px rgba(123,75,218,.06);
     }
 
     .score-row input[type="number"]:focus {
@@ -383,14 +330,20 @@
       box-shadow: 0 0 0 2px rgba(123, 75, 218, 0.18);
     }
 
+    .actions {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+    }
+
     .warning {
       color: #b23b00;
       font-size: 0.8rem;
       margin-top: 6px;
-      width: 100%;
     }
 
-    /* 전체화면 공통 */
     .fullscreen-view {
       position: fixed;
       inset: 0;
@@ -400,8 +353,6 @@
       align-items: center;
       justify-content: center;
       padding: 22px 44px;
-      overflow-y: auto;
-      overflow-x: hidden;
     }
 
     .fullscreen-view.active {
@@ -413,11 +364,10 @@
     }
 
     .fullscreen-title {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       color: #fff;
       text-align: center;
       font-size: 1.35rem;
-      font-weight: 400;
+      font-weight: 900;
       margin-bottom: 24px;
       letter-spacing: 0.02em;
     }
@@ -444,14 +394,13 @@
     }
 
     .fullscreen-section-label {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       position: absolute;
       left: 22px;
       top: -18px;
       padding: 8px 22px;
       border-radius: 999px;
       font-size: 1.05rem;
-      font-weight: 400;
+      font-weight: 900;
       box-shadow: 0 6px 16px rgba(0,0,0,.22);
       z-index: 10;
       white-space: nowrap;
@@ -469,32 +418,15 @@
 
     .fullscreen-row {
       display: grid;
-      grid-template-columns: repeat(4, minmax(130px, 220px));
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
       gap: 18px;
       min-height: 220px;
       align-items: center;
       justify-content: center;
-      justify-items: center;
-      margin: 0 auto;
-      max-width: 980px;
-      overflow: visible;
-    }
-
-    .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
-      grid-template-columns: minmax(130px, 220px);
-    }
-
-    .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
-      grid-template-columns: repeat(2, minmax(130px, 220px));
-    }
-
-    .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
-      grid-template-columns: repeat(3, minmax(130px, 220px));
     }
 
     .fullscreen-card {
       position: relative;
-      width: 100%;
       aspect-ratio: 3 / 4;
       border-radius: 14px;
       overflow: visible;
@@ -512,6 +444,13 @@
       border-radius: 14px;
       display: block;
       background: #fff;
+    }
+
+    .fullscreen-card.empty {
+      opacity: .16;
+      border: 2px dashed rgba(255,255,255,.7);
+      background: rgba(255,255,255,.08);
+      box-shadow: none;
     }
 
     .fullscreen-card.must-card {
@@ -543,14 +482,13 @@
     }
 
     .fullscreen-label {
-      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
       position: absolute;
       top: 8px;
       right: 8px;
       padding: 5px 12px;
       border-radius: 999px;
       font-size: 0.9rem;
-      font-weight: 400;
+      font-weight: 900;
       z-index: 2;
       box-shadow: 0 4px 10px rgba(0,0,0,.18);
     }
@@ -577,53 +515,218 @@
       justify-content: center;
       padding: 0;
       box-shadow: 0 10px 24px rgba(0,0,0,.25);
-      z-index: 1001;
     }
 
-    /* 보너스 5장 이상: PC/태블릿에서는 한 줄 가로 스크롤 */
-    .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
+
+  
+    .app {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app::before {
+      content: "✦  ✧  ✦";
+      position: absolute;
+      right: 24px;
+      bottom: 18px;
+      color: rgba(123, 75, 218, .12);
+      font-size: 3rem;
+      font-weight: 900;
+      pointer-events: none;
+    }
+
+    .panel {
+      border: 1px solid rgba(219, 198, 255, .85);
+    }
+
+    header h1 {
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      text-shadow: 0 2px 0 rgba(255,255,255,.9);
+    }
+
+    .badge {
+      box-shadow: inset 0 -2px 0 rgba(255,255,255,.55), 0 4px 10px rgba(123,75,218,.12);
+    }
+
+    .cards-grid {
+      gap: 12px;
+    }
+
+    .card {
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff, #fff9fd);
+    }
+
+    .card img {
+      filter: saturate(1.05);
+    }
+
+    .card-badge {
+      font-size: .75rem;
+      padding: 4px 10px;
+    }
+
+    .score-panel {
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(250,243,255,.92));
+    }
+
+    .score-panel > div {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "title controls";
+      align-items: center;
+      gap: 14px;
+    }
+
+    .score-panel .section-title {
+      grid-area: title;
+      margin-bottom: 0;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .score-row {
+      margin-top: 0;
+    }
+
+    .score-panel .actions,
+    .score-panel .score-row {
       display: flex;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      max-width: 100%;
-      overflow-x: auto;
-      overflow-y: visible;
-      padding: 10px 8px 16px;
-      scroll-snap-type: x proximity;
+      flex-direction: row;
+      align-items: center;
     }
 
-    .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-      flex: 0 0 190px;
-      scroll-snap-align: center;
+    .score-panel .score-row {
+      gap: 8px;
+      white-space: nowrap;
     }
 
-    .bonus-section .fullscreen-row::-webkit-scrollbar {
-      height: 8px;
+    .score-panel .actions {
+      margin-top: 0;
+      gap: 8px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
     }
 
-    .bonus-section .fullscreen-row::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,.35);
-      border-radius: 999px;
+    .score-panel .score-row,
+    .score-panel .actions {
+      grid-area: controls;
     }
 
-    .bonus-section .fullscreen-row::-webkit-scrollbar-track {
-      background: rgba(255,255,255,.08);
-      border-radius: 999px;
+    .score-panel .score-row {
+      justify-self: start;
     }
 
-    /* 카드 목록: 태블릿/폰 기본 */
-    @media (max-width: 700px) {
-      .cards-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .score-panel .actions {
+      justify-self: end;
+      padding-left: 230px;
+    }
+
+    .score-row input[type="number"] {
+      background: #fff;
+      border: 2px solid rgba(193, 160, 255, .55);
+      box-shadow: inset 0 2px 5px rgba(123,75,218,.06);
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #8d5cff, #d467ff);
+      box-shadow: 0 7px 14px rgba(141, 92, 255, .28);
+    }
+
+    .btn-sub, .btn-ghost {
+      background: rgba(255,255,255,.82);
+      border: 2px solid rgba(219, 198, 255, .8);
+      color: #5d5170;
+    }
+
+    .btn-ghost {
+      border-style: dashed;
+    }
+
+    @media (max-width: 900px) {
+      .score-panel > div {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "title"
+          "controls";
+      }
+
+      .score-panel .score-row,
+      .score-panel .actions {
+        grid-area: auto;
+        justify-self: stretch;
+        padding-left: 0;
+      }
+
+      .score-panel .actions {
+        justify-content: stretch;
+      }
+
+      .score-panel .actions button {
+        flex: 1 1 160px;
       }
     }
 
-    /* 점수 영역: 좁은 화면 */
+  
+    .score-inner {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .score-controls {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .score-inner .section-title {
+      margin-bottom: 0;
+    }
+
+    .score-inner .score-row,
+    .score-inner .actions {
+      margin-top: 0;
+      padding-left: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .score-inner .actions {
+      justify-content: flex-end;
+    }
+
+    .score-inner .actions button {
+      min-width: 160px;
+    }
+
+    #msg {
+      width: 100%;
+    }
+
     @media (max-width: 760px) {
       .score-inner,
       .score-controls,
-      .score-row,
-      .actions {
+      .score-inner .score-row,
+      .score-inner .actions {
         align-items: stretch;
       }
 
@@ -631,76 +734,234 @@
         flex-direction: column;
       }
 
-      .actions button,
-      .score-row button {
+      .score-inner .actions button,
+      .score-inner .score-row button {
         width: 100%;
       }
     }
 
-    /* 태블릿: 노트북처럼 4칸 */
-    @media (min-width: 601px) and (max-width: 1180px) {
-      .fullscreen-view {
-        padding: 24px 20px 24px;
-        align-items: flex-start;
-        overflow-y: auto;
-      }
+  
+    /* 전체화면 카드 줄: 보너스가 많아도 한 줄 유지 + 작은 화면에서는 가로 스크롤 */
+    .fullscreen-row {
+      display: grid !important;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(150px, 1fr);
+      grid-template-columns: none !important;
+      gap: 18px;
+      min-height: 220px;
+      align-items: center;
+      justify-content: start;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 10px 8px 16px;
+      scroll-snap-type: x proximity;
+    }
 
-      .fullscreen-content {
-        width: min(1080px, 100%);
-        max-width: 1080px;
-      }
+    .fullscreen-row .fullscreen-card {
+      min-width: 150px;
+      max-width: 245px;
+      width: 100%;
+      scroll-snap-align: center;
+    }
 
+    .fullscreen-row::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .fullscreen-row::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,.35);
+      border-radius: 999px;
+    }
+
+    .fullscreen-row::-webkit-scrollbar-track {
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+    }
+
+    @media (min-width: 1000px) {
       .fullscreen-row {
-        grid-template-columns: repeat(4, minmax(120px, 190px));
-        gap: 16px;
-        max-width: 100%;
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
-        grid-template-columns: minmax(130px, 190px);
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
-        grid-template-columns: repeat(2, minmax(130px, 190px));
-      }
-
-      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
-        grid-template-columns: repeat(3, minmax(130px, 190px));
-      }
-
-      .fullscreen-card {
-        max-width: 190px;
+        grid-auto-columns: minmax(170px, 1fr);
       }
     }
 
-    /* 스마트폰 세로: 2열 + 세로 스크롤 */
-    @media (max-width: 600px) and (orientation: portrait) {
-      body {
-        padding: 10px;
+    @media (max-width: 850px) {
+      .fullscreen-view {
+        padding: 54px 14px 18px;
+        overflow-y: auto;
+        align-items: flex-start;
       }
 
+      .fullscreen-row {
+        grid-auto-columns: minmax(135px, 42vw);
+        min-height: 190px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .fullscreen-title {
+        font-size: 1.1rem;
+      }
+
+      .fullscreen-section {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .fullscreen-row {
+        grid-auto-columns: minmax(120px, 62vw);
+        gap: 12px;
+      }
+    }
+
+  
+    /* 최종 수정: 전체화면에서 선택 카드가 1~3장일 때 가운데 정렬 */
+    .fullscreen-row {
+      justify-content: center !important;
+      justify-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 980px;
+    }
+
+    .fullscreen-row .fullscreen-card {
+      width: min(220px, 100%);
+    }
+
+    /* 보너스가 5장 이상처럼 많아질 때는 한 줄 유지 + 가로 스크롤 */
+    .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
+      justify-content: start !important;
+      max-width: 100%;
+    }
+
+    @supports not selector(:has(*)) {
+      .fullscreen-row {
+        justify-content: center !important;
+      }
+    }
+
+  
+    /* 폰트 최종 수정 */
+    header h1,
+    .section-title,
+    .fullscreen-title,
+    .fullscreen-section-label,
+    .mode-btn,
+    button,
+    .badge,
+    .card-badge,
+    .fullscreen-label {
+      font-family: "Jua", "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    body,
+    input,
+    label,
+    .helper-text,
+    .warning {
+      font-family: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    }
+
+    header h1 {
+      font-size: 1.55rem;
+      font-weight: 400;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 400;
+    }
+
+    .helper-text {
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    button,
+    .mode-btn,
+    .badge,
+    .card-badge,
+    .fullscreen-label {
+      font-weight: 400;
+    }
+
+    .score-row input[type="number"] {
+      font-family: "Jua", "Gowun Dodum", system-ui, sans-serif;
+      font-size: 1rem;
+    }
+
+  
+    /* 모바일 전체화면 최종 수정: 카드가 화면 안에 맞게 자동 축소 */
+    .fullscreen-view {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .fullscreen-content {
+      width: min(1160px, 100%);
+      max-height: none;
+    }
+
+    .fullscreen-row {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+      grid-auto-flow: row !important;
+      grid-auto-columns: unset !important;
+      justify-content: center !important;
+      justify-items: center !important;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      gap: clamp(8px, 1.8vw, 18px);
+      padding: 8px 4px 10px;
+      max-width: 100%;
+    }
+
+    .fullscreen-row .fullscreen-card {
+      width: 100%;
+      max-width: clamp(120px, 18vw, 220px);
+      min-width: 0 !important;
+    }
+
+    /* 선택 카드가 1~3장일 때도 가운데 모이도록 */
+    .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
+      grid-template-columns: minmax(120px, 220px) !important;
+    }
+
+    .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
+      grid-template-columns: repeat(2, minmax(120px, 220px)) !important;
+    }
+
+    .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
+      grid-template-columns: repeat(3, minmax(120px, 220px)) !important;
+    }
+
+    .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+      grid-template-columns: repeat(4, minmax(120px, 220px)) !important;
+    }
+
+    /* 스마트폰 세로 */
+    @media (max-width: 600px) and (orientation: portrait) {
       .fullscreen-view {
-        padding: 52px 10px 18px;
+        padding: 46px 10px 16px;
         align-items: flex-start;
       }
 
       .fullscreen-title {
         font-size: 1.15rem;
-        margin-bottom: 18px;
+        margin-bottom: 20px;
       }
 
       .fullscreen-section {
-        width: 100%;
-        padding: 30px 10px 14px;
+        padding: 28px 8px 14px;
         margin-bottom: 22px;
         border-radius: 16px;
       }
 
       .fullscreen-section-label {
         left: 14px;
-        top: -18px;
-        font-size: 0.92rem;
-        padding: 7px 17px;
+        top: -17px;
+        font-size: 0.95rem;
+        padding: 7px 18px;
       }
 
       .fullscreen-row,
@@ -708,27 +969,12 @@
       .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
       .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
       .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        min-height: 0;
-        width: 100%;
-        max-width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(86px, 1fr)) !important;
+        gap: 8px;
       }
 
-      .fullscreen-card {
-        max-width: 180px;
-      }
-
-      .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        overflow-x: hidden;
-        padding: 6px 0 8px;
-      }
-
-      .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
-        flex: unset;
+      .fullscreen-row .fullscreen-card {
+        max-width: min(29vw, 128px);
       }
 
       .fullscreen-label {
@@ -747,46 +993,509 @@
       }
     }
 
-    /* 스마트폰 가로: 한 줄 */
-    @media (max-width: 900px) and (max-height: 560px) and (orientation: landscape) {
+    /* 스마트폰 가로 */
+    @media (max-height: 560px) and (orientation: landscape) {
       .fullscreen-view {
-        padding: 38px 10px 12px;
+        padding: 38px 12px 12px;
         align-items: flex-start;
       }
 
       .fullscreen-title {
         font-size: 1rem;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
       }
 
       .fullscreen-section {
-        padding: 24px 8px 12px;
-        margin-bottom: 14px;
+        padding: 24px 10px 12px;
+        margin-bottom: 16px;
       }
 
-      .fullscreen-row {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-        gap: 10px;
-        overflow-x: auto;
-        max-width: 100%;
-        padding: 6px 0 8px;
+      .fullscreen-row,
+      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+      .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
       }
 
       .fullscreen-row .fullscreen-card {
-        flex: 0 0 110px;
-        width: 110px;
-        max-width: 110px;
+        max-width: min(13.5vw, 135px);
+      }
+
+      .fullscreen-section-label {
+        font-size: 0.85rem;
+        padding: 5px 15px;
+      }
+
+      .fullscreen-label {
+        font-size: 0.68rem;
+        padding: 3px 7px;
       }
 
       .close-fullscreen {
+        top: 8px;
+        right: 10px;
         width: 38px;
         height: 38px;
         font-size: 1.55rem;
       }
     }
-  </style>
+
+  
+    /* ✅ 모바일/태블릿 전체화면 최종 고정
+       - 세로 화면: 카드가 화면 안에서 잘리지 않도록 자동 축소
+       - 가로 화면: 화면 높이에 맞춰 자동 축소
+       - 기존 가로 스크롤 설정을 강하게 덮어씀
+    */
+    @media (max-width: 768px) {
+      .fullscreen-view {
+        padding: 52px 10px 18px !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+      }
+
+      .fullscreen-content {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .fullscreen-title {
+        font-size: 1.15rem !important;
+        margin-bottom: 18px !important;
+      }
+
+      .fullscreen-section {
+        width: 100% !important;
+        padding: 30px 8px 14px !important;
+        margin-bottom: 22px !important;
+        border-radius: 16px !important;
+        overflow: visible !important;
+      }
+
+      .fullscreen-section-label {
+        left: 14px !important;
+        top: -18px !important;
+        font-size: 0.92rem !important;
+        padding: 7px 17px !important;
+      }
+
+      .fullscreen-row {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+        padding: 6px 0 8px !important;
+        scroll-snap-type: none !important;
+      }
+
+      .fullscreen-row .fullscreen-card {
+        flex: 0 1 calc((100% - 24px) / 4) !important;
+        width: calc((100% - 24px) / 4) !important;
+        min-width: 0 !important;
+        max-width: 118px !important;
+        scroll-snap-align: unset !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) .fullscreen-card {
+        flex-basis: min(56vw, 180px) !important;
+        width: min(56vw, 180px) !important;
+        max-width: 180px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) .fullscreen-card {
+        flex-basis: min(40vw, 150px) !important;
+        width: min(40vw, 150px) !important;
+        max-width: 150px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) .fullscreen-card {
+        flex-basis: min(29vw, 130px) !important;
+        width: min(29vw, 130px) !important;
+        max-width: 130px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) .fullscreen-card {
+        flex-basis: calc((100% - 24px) / 4) !important;
+        width: calc((100% - 24px) / 4) !important;
+        max-width: 118px !important;
+      }
+
+      .fullscreen-label {
+        font-size: 0.68rem !important;
+        padding: 3px 7px !important;
+        top: 5px !important;
+        right: 5px !important;
+      }
+
+      .close-fullscreen {
+        top: 10px !important;
+        right: 10px !important;
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 1.7rem !important;
+        z-index: 1001 !important;
+      }
+    }
+
+    @media (max-width: 768px) and (orientation: landscape) {
+      .fullscreen-view {
+        padding: 38px 10px 12px !important;
+      }
+
+      .fullscreen-title {
+        font-size: 1rem !important;
+        margin-bottom: 14px !important;
+      }
+
+      .fullscreen-section {
+        padding: 24px 8px 12px !important;
+        margin-bottom: 14px !important;
+      }
+
+      .fullscreen-row {
+        gap: 7px !important;
+      }
+
+      .fullscreen-row .fullscreen-card {
+        flex: 0 1 min(14vw, 118px) !important;
+        width: min(14vw, 118px) !important;
+        max-width: 118px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) .fullscreen-card {
+        flex-basis: min(22vw, 145px) !important;
+        width: min(22vw, 145px) !important;
+        max-width: 145px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) .fullscreen-card {
+        flex-basis: min(18vw, 130px) !important;
+        width: min(18vw, 130px) !important;
+        max-width: 130px !important;
+      }
+
+      .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) .fullscreen-card {
+        flex-basis: min(15vw, 122px) !important;
+        width: min(15vw, 122px) !important;
+        max-width: 122px !important;
+      }
+
+      .close-fullscreen {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 1.55rem !important;
+      }
+    }
+
+  
+/* ===== 모바일 세로: 2열 + 세로 스크롤 ===== */
+@media (max-width:768px) and (orientation:portrait){
+  .fullscreen-view{
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    align-items:flex-start!important;
+  }
+  .fullscreen-row{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:12px!important;
+    justify-items:center!important;
+    overflow:visible!important;
+  }
+  .fullscreen-row .fullscreen-card{
+    width:100%!important;
+    max-width:180px!important;
+    min-width:0!important;
+  }
+}
+/* ===== 모바일 가로: 한줄 가운데 ===== */
+@media (max-width:768px) and (orientation:landscape){
+  .fullscreen-row{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    justify-content:center!important;
+    gap:10px!important;
+    overflow-x:auto!important;
+  }
+  .fullscreen-row .fullscreen-card{
+    width:110px!important;
+    flex:0 0 110px!important;
+  }
+}
+
+
+/* ===== 최종 반응형 정리: 스마트폰만 2열, 태블릿은 노트북형 ===== */
+
+/* 태블릿: 노트북처럼 넓게 보기 */
+@media (min-width: 601px) and (max-width: 1180px) {
+  .fullscreen-view {
+    padding: 46px 28px 24px !important;
+    align-items: center !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .fullscreen-content {
+    width: min(1080px, 100%) !important;
+    max-width: 1080px !important;
+  }
+
+  .fullscreen-row {
+    display: grid !important;
+    grid-auto-flow: row !important;
+    grid-auto-columns: unset !important;
+    grid-template-columns: repeat(4, minmax(120px, 1fr)) !important;
+    justify-content: center !important;
+    justify-items: center !important;
+    gap: 16px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    max-width: 100% !important;
+  }
+
+  .fullscreen-row .fullscreen-card {
+    width: 100% !important;
+    max-width: 190px !important;
+    min-width: 0 !important;
+    flex: unset !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
+    grid-template-columns: minmax(130px, 190px) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, minmax(130px, 190px)) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(130px, 190px)) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(120px, 190px)) !important;
+  }
+}
+
+/* 스마트폰 세로만 2열 */
+@media (max-width: 600px) and (orientation: portrait) {
+  .fullscreen-view {
+    padding: 52px 10px 18px !important;
+    align-items: flex-start !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .fullscreen-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    gap: 12px !important;
+    justify-items: center !important;
+    overflow: visible !important;
+  }
+
+  .fullscreen-row .fullscreen-card {
+    width: 100% !important;
+    max-width: 180px !important;
+    min-width: 0 !important;
+    flex: unset !important;
+  }
+}
+
+/* 스마트폰 가로는 한 줄 유지 */
+@media (max-width: 900px) and (max-height: 560px) and (orientation: landscape) {
+  .fullscreen-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+  }
+
+  .fullscreen-row .fullscreen-card {
+    width: 110px !important;
+    flex: 0 0 110px !important;
+  }
+}
+
+
+/* ===== 태블릿 전체화면 최종 보정: 진짜 전체화면 + 카드 축소 ===== */
+@media (min-width: 601px) and (max-width: 1180px) {
+  .fullscreen-view {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    padding: 28px 18px 18px !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .fullscreen-content {
+    width: 100% !important;
+    max-width: 1060px !important;
+    margin: 0 auto !important;
+  }
+
+  .fullscreen-title {
+    font-size: 1.18rem !important;
+    margin-bottom: 18px !important;
+  }
+
+  .fullscreen-section {
+    padding: 26px 14px 14px !important;
+    margin-bottom: 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .fullscreen-section-label {
+    top: -17px !important;
+    left: 18px !important;
+    font-size: 0.95rem !important;
+    padding: 7px 18px !important;
+  }
+
+  .fullscreen-row {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(100px, 150px)) !important;
+    gap: 14px !important;
+    min-height: 0 !important;
+    max-width: 720px !important;
+    width: 100% !important;
+    justify-content: center !important;
+    justify-items: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
+    grid-template-columns: minmax(110px, 150px) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, minmax(110px, 150px)) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(105px, 150px)) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(100px, 150px)) !important;
+  }
+
+  .fullscreen-card {
+    width: 100% !important;
+    max-width: 150px !important;
+    min-width: 0 !important;
+  }
+
+  .fullscreen-label {
+    font-size: 0.74rem !important;
+    padding: 4px 9px !important;
+    top: 6px !important;
+    right: 6px !important;
+  }
+
+  .close-fullscreen {
+    top: 14px !important;
+    right: 16px !important;
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 1.7rem !important;
+  }
+
+  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    max-width: 100% !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    padding: 8px 4px 12px !important;
+  }
+
+  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
+    flex: 0 0 145px !important;
+    width: 145px !important;
+    max-width: 145px !important;
+  }
+}
+
+/* 태블릿 가로 화면이 낮을 때는 조금 더 압축 */
+@media (min-width: 601px) and (max-width: 1180px) and (max-height: 760px) {
+  .fullscreen-view {
+    padding-top: 18px !important;
+  }
+
+  .fullscreen-title {
+    font-size: 1.05rem !important;
+    margin-bottom: 14px !important;
+  }
+
+  .fullscreen-section {
+    padding: 24px 12px 12px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .fullscreen-row {
+    grid-template-columns: repeat(4, minmax(90px, 128px)) !important;
+    gap: 12px !important;
+    max-width: 620px !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child) {
+    grid-template-columns: minmax(100px, 128px) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, minmax(100px, 128px)) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(95px, 128px)) !important;
+  }
+
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(90px, 128px)) !important;
+  }
+
+  .fullscreen-card {
+    max-width: 128px !important;
+  }
+
+  .fullscreen-section-label {
+    font-size: 0.86rem !important;
+    padding: 6px 16px !important;
+  }
+
+  .fullscreen-label {
+    font-size: 0.68rem !important;
+    padding: 3px 8px !important;
+  }
+
+  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
+    flex-basis: 124px !important;
+    width: 124px !important;
+    max-width: 124px !important;
+  }
+}
+
+</style>
 </head>
 <body>
   <div class="app">
@@ -1077,9 +1786,11 @@
 
       msg.style.display = "none";
 
+      // 마지막으로 반영했던 문제 상태로 정확히 복원
       currentStep = lastStepSnapshot.step;
       isFinished = lastStepSnapshot.finishedBefore || false;
 
+      // 누적 점수에서 직전에 반영했던 점수 제거
       totalScore -= lastStepSnapshot.score;
       if (totalScore < 0) totalScore = 0;
 
@@ -1087,6 +1798,7 @@
       bonusSelected = [...lastStepSnapshot.bonus];
       scoreInput.value = String(lastStepSnapshot.score);
 
+      // 같은 스냅샷을 여러 번 눌러 점수가 계속 빠지는 문제 방지
       lastStepSnapshot = null;
 
       syncUI();
@@ -1127,13 +1839,22 @@
       return card;
     }
 
+    function createEmptyFullscreenCard() {
+      const card = document.createElement("div");
+      card.className = "fullscreen-card empty";
+      return card;
+    }
+
     function renderFullscreenCards() {
       fullscreenMustGrid.innerHTML = "";
       fullscreenBonusGrid.innerHTML = "";
       fullscreenStep.textContent = currentStep.toString();
 
       const selectedTotal = mustSelected.length + bonusSelected.length;
+      const bonusSection = document.querySelector(".bonus-section");
 
+      // 총 선택 카드가 4장 이하이면 한 줄로 표시
+      // 예: 필수 2 + 보너스 2, 필수 3 + 보너스 1
       if (selectedTotal <= 4) {
         mustSection.style.display = "block";
         bonusSection.style.display = "none";
@@ -1152,6 +1873,8 @@
         return;
       }
 
+      // 5장 이상이면 위: 필수 / 아래: 보너스
+      // 보너스가 4장을 넘어도 한 줄로 가로 스크롤 표시
       mustSection.style.display = "block";
       bonusSection.style.display = bonusSelected.length ? "block" : "none";
       mustSectionLabel.textContent = "⭐ 필수 카드";
