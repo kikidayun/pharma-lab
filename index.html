@@ -179,9 +179,9 @@
       }
     }
 
-    /* 스마트폰: 4열 2행 */
+    /* 스마트폰: 2열 4행 */
     @media (max-width: 480px) {
-      .cards-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
     }
 
     .card {
@@ -554,12 +554,14 @@
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: center;
-        gap: 32px;
-        padding: 6px 12px 14px;
+        gap: 0;
+        padding: 6px 16px 14px;
         max-width: 100%;
       }
       .selected-card-item {
         flex: 0 0 clamp(140px, 22vw, 200px);
+        margin: 0 20px;
+        padding: 12px 0;
       }
     }
 
