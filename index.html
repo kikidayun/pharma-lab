@@ -2427,6 +2427,314 @@
   }
 }
 
+
+
+/* =========================================================
+   2026-06-15 긴급 최종 보정
+   - 스마트폰: 카드 개수와 상관없이 같은 크기 2열, 1장도 과하게 확대 금지
+   - 스마트폰: 선택 카드가 많으면 팝업 내부에서 세로 스크롤
+   - 태블릿: 카드 기존 대비 크게, 무조건 한 줄 + 가로 스크롤
+   ========================================================= */
+
+/* 공통 팝업 스크롤 안정화 */
+.fullscreen-view.active {
+  display: flex !important;
+}
+
+.fullscreen-view {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  background: rgba(15, 13, 24, 0.94) !important;
+  z-index: 9999 !important;
+  overflow: hidden !important;
+}
+
+.fullscreen-content {
+  box-sizing: border-box !important;
+}
+
+.fullscreen-section.must-section {
+  box-sizing: border-box !important;
+}
+
+.fullscreen-card,
+.fullscreen-card img {
+  aspect-ratio: 3 / 4 !important;
+}
+
+.fullscreen-label {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+
+/* 스마트폰 세로: 무조건 2열, 카드 수별 특수 확대/축소 전부 무시 */
+@media (max-width: 600px) and (orientation: portrait) {
+  .fullscreen-view {
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: calc(env(safe-area-inset-top, 0px) + 64px) 10px 12px !important;
+    overflow: hidden !important;
+  }
+
+  .fullscreen-content {
+    width: calc(100vw - 20px) !important;
+    max-width: calc(100vw - 20px) !important;
+    max-height: calc(100dvh - 76px - env(safe-area-inset-top, 0px)) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 0 6px 14px !important;
+    margin: 0 auto !important;
+  }
+
+  .fullscreen-title {
+    font-size: 1.12rem !important;
+    margin: 0 0 16px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 5 !important;
+  }
+
+  .fullscreen-section.must-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 30px 10px 16px !important;
+    margin: 0 auto 14px !important;
+    border-radius: 18px !important;
+    overflow: visible !important;
+  }
+
+  .fullscreen-section-label.must {
+    left: 14px !important;
+    top: -17px !important;
+    font-size: .92rem !important;
+    padding: 7px 17px !important;
+  }
+
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    gap: 14px 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    justify-content: center !important;
+    justify-items: center !important;
+    align-items: start !important;
+    overflow: visible !important;
+    padding: 8px 2px 10px !important;
+    margin: 0 auto !important;
+    scroll-snap-type: none !important;
+  }
+
+  .fullscreen-row .fullscreen-card,
+  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
+    width: min(39vw, 154px) !important;
+    max-width: min(39vw, 154px) !important;
+    min-width: 0 !important;
+    flex: none !important;
+    transform: none !important;
+  }
+
+  .fullscreen-card.must-card {
+    box-shadow:
+      0 0 0 4px rgba(255,255,255,.98),
+      0 0 0 9px rgba(255,210,90,.92),
+      0 0 24px 8px rgba(255,210,90,.56),
+      0 12px 26px rgba(0,0,0,.42) !important;
+  }
+
+  .fullscreen-card.bonus-card {
+    box-shadow:
+      0 0 0 4px rgba(255,255,255,.98),
+      0 0 0 9px rgba(111,213,255,.9),
+      0 0 24px 8px rgba(111,213,255,.52),
+      0 12px 26px rgba(0,0,0,.42) !important;
+  }
+
+  .fullscreen-label {
+    top: 6px !important;
+    right: 6px !important;
+    font-size: .68rem !important;
+    padding: 4px 8px !important;
+  }
+
+  .close-fullscreen {
+    top: calc(env(safe-area-inset-top, 0px) + 12px) !important;
+    right: 14px !important;
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 1.6rem !important;
+    z-index: 10001 !important;
+  }
+}
+
+/* 스마트폰 가로: 한 줄 스크롤, 세로 찌그러짐 방지 */
+@media (max-width: 900px) and (max-height: 560px) and (orientation: landscape) {
+  .fullscreen-view {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px !important;
+  }
+
+  .fullscreen-content {
+    width: calc(100vw - 20px) !important;
+    max-height: calc(100dvh - 20px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    padding: 10px 8px 16px !important;
+  }
+
+  .fullscreen-row .fullscreen-card {
+    flex: 0 0 132px !important;
+    width: 132px !important;
+    max-width: 132px !important;
+    min-width: 132px !important;
+  }
+}
+
+/* 태블릿: 카드 1.5배 느낌으로 확대 + 전체화면 안에서 한 줄 가로 스크롤 */
+@media (min-width: 601px) and (max-width: 1180px) and (min-height: 561px) {
+  .fullscreen-view {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 18px 20px !important;
+    overflow: hidden !important;
+  }
+
+  .fullscreen-content {
+    width: calc(100vw - 40px) !important;
+    max-width: none !important;
+    max-height: calc(100dvh - 36px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 8px 8px 16px !important;
+    margin: 0 auto !important;
+  }
+
+  .fullscreen-title {
+    font-size: 1.28rem !important;
+    margin: 0 0 20px !important;
+  }
+
+  .fullscreen-section.must-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 36px 22px 24px !important;
+    margin: 0 auto !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+  }
+
+  .fullscreen-section-label.must {
+    left: 22px !important;
+    top: -17px !important;
+    font-size: 1rem !important;
+    padding: 8px 22px !important;
+  }
+
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 24px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 16px 14px 28px !important;
+    margin: 0 auto !important;
+    scroll-snap-type: x proximity !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .fullscreen-row .fullscreen-card,
+  .bonus-section .fullscreen-row:has(.fullscreen-card:nth-child(5)) .fullscreen-card {
+    flex: 0 0 clamp(255px, 30vw, 330px) !important;
+    width: clamp(255px, 30vw, 330px) !important;
+    max-width: 330px !important;
+    min-width: 255px !important;
+    scroll-snap-align: center !important;
+  }
+
+  .fullscreen-label {
+    font-size: .92rem !important;
+    padding: 6px 13px !important;
+    top: 8px !important;
+    right: 8px !important;
+  }
+
+  .close-fullscreen {
+    top: 16px !important;
+    right: 18px !important;
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.75rem !important;
+  }
+}
+
+/* 태블릿 가로처럼 높이가 낮은 화면도 한 줄 스크롤 유지 */
+@media (min-width: 601px) and (max-width: 1180px) and (max-height: 760px) and (orientation: landscape) {
+  .fullscreen-section.must-section {
+    padding: 28px 18px 18px !important;
+  }
+
+  .fullscreen-row,
+  .fullscreen-row:has(.fullscreen-card:nth-child(1):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(2):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(3):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(4):last-child),
+  .fullscreen-row:has(.fullscreen-card:nth-child(5)) {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 22px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 14px 12px 24px !important;
+  }
+
+  .fullscreen-row .fullscreen-card {
+    flex: 0 0 clamp(230px, 23vw, 290px) !important;
+    width: clamp(230px, 23vw, 290px) !important;
+    max-width: 290px !important;
+    min-width: 230px !important;
+  }
+}
+
 </style>
 </head>
 <body>
